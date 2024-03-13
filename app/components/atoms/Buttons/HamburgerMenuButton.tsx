@@ -3,7 +3,7 @@ import { Menu } from "lucide-react";
 import React from "react";
 
 function HamburgerMenuButton({
-  variant = "secondary",
+  variant = "default",
   size = "icon",
 }: ButtonProps) {
   return (
