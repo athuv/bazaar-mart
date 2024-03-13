@@ -1,4 +1,4 @@
-import HamburgerMenuButton from "@/app/components/atoms/Buttons/HamburgerMenuButton";
+import HamburgerMenuButton from "@/app/components/atoms/buttons/HamburgerMenuButton";
 import MobileLogo from "@/app/components/atoms/logo/MobileLogo";
 import React from "react";
 
