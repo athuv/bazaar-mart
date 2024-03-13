@@ -7,7 +7,7 @@ function HamburgerMenuButton({
   size = "icon",
 }: ButtonProps) {
   return (
-    <Button variant={variant} size={size}>
+    <Button aria-label="menu" variant={variant} size={size}>
       <Menu size={24} />
     </Button>
   );
