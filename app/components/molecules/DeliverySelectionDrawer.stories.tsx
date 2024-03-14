@@ -1,6 +1,6 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 
-import DeliveredToButton from "./DeliveredToButton";
+import DeliverySelectionDrawer from "./DeliverySelectionDrawer";
 
 const withTailwindClasses = (Story: StoryFn) => (
   <div className="w-screen bg-secondary">
@@ -9,16 +9,16 @@ const withTailwindClasses = (Story: StoryFn) => (
 );
 
 const meta = {
-  title: "molecules/Delivered To Button",
-  component: DeliveredToButton,
+  title: "molecules/Delivery Selection Drawer & Trigger",
+  component: DeliverySelectionDrawer,
   decorators: [withTailwindClasses],
   parameters: {
     layout: "fullscreen",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof DeliveredToButton>;
+} satisfies Meta<typeof DeliverySelectionDrawer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DeliveredToButtonComp: Story = {};
+export const DeliverySelectionDrawerComp: Story = {};
