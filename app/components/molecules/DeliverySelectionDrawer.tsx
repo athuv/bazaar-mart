@@ -15,15 +15,14 @@ import {
 } from "@/app/components/atoms/shadcn/drawer";
 import { ScrollArea } from "@/app/components/atoms/shadcn/scroll-area";
 import { Alert, AlertDescription } from "@/app/components/atoms/shadcn/alert";
-import countries from "@/lib/data/countries.json";
+import { Country, getData } from "country-list";
 import { Input } from "@/app/components/atoms/shadcn/input";
 import { Separator } from "@/app/components/atoms/shadcn/separator";
-import { count } from "console";
 
 function DeliverySelectionDrawer() {
-  const [country, setCountry] = useState({ name: "", code: "" });
-  const [showCountries, setShowCountries] = useState(false);
-  const [filter, setFilter] = useState("");
+  const [country, setCountry] = useState<Country>({ name: "", code: "" });
+  const [showCountries, setShowCountries] = useState<boolean>(false);
+  const [filter, setFilter] = useState<string>("");
 
   useEffect(() => {
     async function getLocationByIp() {
@@ -110,40 +109,37 @@ function DeliverySelectionDrawer() {
                 <div className="w-full">
                   <ScrollArea className="overflow-auto ">
                     <ul className="h-80 overflow-y-scroll">
-                      {countries
+                      {getData()
                         .filter(
                           (f) =>
                             f.name.toLowerCase().includes(filter) ||
                             filter === "",
                         )
                         .map((_country) => (
-                          <>
-                            <DrawerClose asChild>
-                              <div>
-                                <li
-                                  key={_country.code}
-                                  className="flex items-center gap-2 px-4"
-                                  onClick={() => {
-                                    setCountry({
-                                      name: _country.name,
-                                      code: _country.code,
-                                    });
-                                  }}
-                                >
-                                  <div className="h-auto w-6">
-                                    <Image
-                                      alt="country"
-                                      src={`https://flagcdn.com/${_country.code.toLowerCase()}.svg`}
-                                      width={1200}
-                                      height={600}
-                                    />
-                                  </div>
-                                  {_country.name}
-                                </li>
-                                <Separator className="my-2" />
-                              </div>
-                            </DrawerClose>
-                          </>
+                          <DrawerClose key={_country.code} asChild>
+                            <div>
+                              <li
+                                className="flex items-center gap-2 px-4"
+                                onClick={() => {
+                                  setCountry({
+                                    name: _country.name,
+                                    code: _country.code,
+                                  });
+                                }}
+                              >
+                                <div className="h-auto w-6">
+                                  <Image
+                                    alt="country"
+                                    src={`https://flagcdn.com/${_country.code.toLowerCase()}.svg`}
+                                    width={1200}
+                                    height={600}
+                                  />
+                                </div>
+                                {_country.name}
+                              </li>
+                              <Separator className="my-2" />
+                            </div>
+                          </DrawerClose>
                         ))}
                     </ul>
                   </ScrollArea>
