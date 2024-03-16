@@ -18,6 +18,12 @@ import { Alert, AlertDescription } from "@/app/components/atoms/shadcn/alert";
 import { Country, getData } from "country-list";
 import { Input } from "@/app/components/atoms/shadcn/input";
 import { Separator } from "@/app/components/atoms/shadcn/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/app/components/atoms/shadcn/tooltip";
 
 function DeliverySelectionDrawer() {
   const [country, setCountry] = useState<Country>({ name: "", code: "" });
@@ -41,14 +47,22 @@ function DeliverySelectionDrawer() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <div className="px-2 py-1">
-          <Button
-            onClick={() => setShowCountries(false)}
-            className="flex w-screen justify-start gap-2 px-0"
-            variant="secondary"
-          >
-            <MapPin /> Delivered To {country.name}
-          </Button>
+        <div className="w-screen px-2 py-1">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  onClick={() => setShowCountries(false)}
+                  className="flex w-full justify-start gap-2 px-0"
+                  variant="secondary"
+                >
+                  <MapPin />
+                  <span className="truncate">Delivered To {country.name}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{country.name}</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </DrawerTrigger>
       <DrawerContent>
@@ -125,6 +139,7 @@ function DeliverySelectionDrawer() {
                                     name: _country.name,
                                     code: _country.code,
                                   });
+                                  setFilter("");
                                 }}
                               >
                                 <div className="h-auto w-6">
