@@ -45,7 +45,7 @@ function DeliverySelectionDrawer() {
         <div className="px-2 py-1">
           <Button
             onClick={() => setShowCountries(false)}
-            className="w-screen justify-start px-0"
+            className="flex w-screen justify-start gap-2 px-0"
             variant="secondary"
           >
             <MapPin /> Delivered To {country.name}
