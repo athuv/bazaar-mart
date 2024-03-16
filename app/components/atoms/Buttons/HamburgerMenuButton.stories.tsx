@@ -3,7 +3,7 @@ import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import HamburgerMenuButton from "./HamburgerMenuButton";
 
 const withTailwindClasses = (Story: StoryFn) => (
-  <div className="bg-primary w-screen p-4">
+  <div className="w-screen bg-primary p-4">
     <Story />
   </div>
 );
