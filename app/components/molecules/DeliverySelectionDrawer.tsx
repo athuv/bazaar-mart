@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button } from "@/app/components/atoms/shadcn/button";
-import { CircleX, MapPin } from "lucide-react";
+import { CircleX, MapPin, Ellipsis } from "lucide-react";
 import Image from "next/image";
 import {
   Drawer,
@@ -15,7 +15,7 @@ import {
 } from "@/app/components/atoms/shadcn/drawer";
 import { ScrollArea } from "@/app/components/atoms/shadcn/scroll-area";
 import { Alert, AlertDescription } from "@/app/components/atoms/shadcn/alert";
-import { Country, getData } from "country-list";
+import { getData } from "country-list";
 import { Input } from "@/app/components/atoms/shadcn/input";
 import { Separator } from "@/app/components/atoms/shadcn/separator";
 import {
@@ -24,25 +24,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/app/components/atoms/shadcn/tooltip";
+import useDeliveryLocation from "@/app/_hooks/useDeliveryLocation";
 
 function DeliverySelectionDrawer() {
-  const [country, setCountry] = useState<Country>({ name: "", code: "" });
-  const [showCountries, setShowCountries] = useState<boolean>(false);
-  const [filter, setFilter] = useState<string>("");
-
-  useEffect(() => {
-    async function getLocationByIp() {
-      const response = await fetch("http://ip-api.com/json/");
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-
-      const data = await response.json();
-      setCountry({ name: data.country, code: data.countryCode.toLowerCase() });
-    }
-
-    getLocationByIp();
-  }, []);
+  const {
+    country,
+    showCountries,
+    filter,
+    setCountry,
+    setFilter,
+    setShowCountries,
+  } = useDeliveryLocation();
 
   return (
     <Drawer>
@@ -57,7 +49,12 @@ function DeliverySelectionDrawer() {
                   variant="secondary"
                 >
                   <MapPin />
-                  <span className="truncate">Delivered To {country.name}</span>
+                  <div className="flex items-center truncate">
+                    Delivered To{" "}
+                    {country.name || (
+                      <Ellipsis className="animate-pulse p-1" size={32} />
+                    )}
+                  </div>
                 </Button>
               </TooltipTrigger>
               <TooltipContent>{country.name}</TooltipContent>
@@ -99,7 +96,7 @@ function DeliverySelectionDrawer() {
                   </Alert>
                 </div>
                 <div className="flex w-full flex-col gap-2">
-                  <DrawerClose onClick={() => setShowCountries(false)} asChild>
+                  <DrawerClose asChild>
                     <Button>Stay</Button>
                   </DrawerClose>
 
