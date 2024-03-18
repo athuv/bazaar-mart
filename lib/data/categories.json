@@ -1,0 +1,8 @@
+[
+  { "id": "001", "category": "Electronics", "link": "./" },
+  { "id": "002", "category": "Food", "link": "./" },
+  { "id": "003", "category": "Book", "link": "./" },
+  { "id": "004", "category": "Clothing", "link": "./" },
+  { "id": "005", "category": "Personal Care", "link": "./" },
+  { "id": "006", "category": "Furniture", "link": "./" }
+]
