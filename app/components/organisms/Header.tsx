@@ -4,7 +4,7 @@ import React from "react";
 
 function Header() {
   return (
-    <header className="bg-primary px-2 py-2">
+    <header className="bg-primary px-2">
       <div className="flex justify-between">
         <MenuButtonAndLogo />
         <ProfileAndCartLink />
