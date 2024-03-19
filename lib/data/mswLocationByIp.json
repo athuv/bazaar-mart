@@ -1,0 +1,18 @@
+{
+  "data": {
+    "status": "success",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "region": "1",
+    "regionName": "Western Province",
+    "city": "Nugegoda",
+    "zip": "10250",
+    "lat": 6.8719,
+    "lon": 79.8939,
+    "timezone": "Asia/Colombo",
+    "isp": "SLTADSL-SLT",
+    "org": "",
+    "as": "AS9329 Sri Lanka Telecom Internet",
+    "query": "112.134.223.14"
+  }
+}

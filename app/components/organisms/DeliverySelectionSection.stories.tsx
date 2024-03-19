@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { rest } from "msw";
 
+import mockLocationData from "@/lib/data/mswLocationByIp.json";
 import DeliverySelectionSection from "./DeliverySelectionSection";
 
 // const withTailwindClasses = (Story: StoryFn) => (
@@ -21,4 +23,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DeliverySelectionSectionComp: Story = {};
+export const DeliverySelectionSectionComp: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        rest.get("api/v1/deliveryLocation", (req, res, ctx) =>
+          res(ctx.json(mockLocationData)),
+        ),
+      ],
+    },
+  },
+};
+
+export const LocationLoading = {
+  parameters: {
+    msw: {
+      handlers: [
+        rest.get("api/v1/deliveryLocation", (req, res, ctx) => {
+          return res(ctx.delay(10000), ctx.json(mockLocationData));
+        }),
+      ],
+    },
+  },
+};
