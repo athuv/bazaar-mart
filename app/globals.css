@@ -75,3 +75,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .header-1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+  }
+
+  .header-2 {
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  }
+
+  .header-3 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+
+  .header-4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+  }
+}
