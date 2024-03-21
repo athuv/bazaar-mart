@@ -1,8 +1,38 @@
 [
-  { "id": "001", "category": "Electronics", "link": "./" },
-  { "id": "002", "category": "Food", "link": "./" },
-  { "id": "003", "category": "Book", "link": "./" },
-  { "id": "004", "category": "Clothing", "link": "./" },
-  { "id": "005", "category": "Personal Care", "link": "./" },
-  { "id": "006", "category": "Furniture", "link": "./" }
+  {
+    "id": "001",
+    "category": "Parts & accessories",
+    "link": "./",
+    "imgSrc": "/images/categories/parts-and-accessories.png"
+  },
+  {
+    "id": "002",
+    "category": "Trading Cards",
+    "link": "./",
+    "imgSrc": "/images/categories/trading-cards.png"
+  },
+  {
+    "id": "003",
+    "category": "Pre-loved luxury",
+    "link": "./",
+    "imgSrc": "/images/categories/pre-loved-luxury.png"
+  },
+  {
+    "id": "004",
+    "category": "Sneakers",
+    "link": "./",
+    "imgSrc": "/images/categories/sneakers.png"
+  },
+  {
+    "id": "005",
+    "category": "Watches",
+    "link": "./",
+    "imgSrc": "/images/categories/watches.png"
+  },
+  {
+    "id": "006",
+    "category": "Handbags",
+    "link": "./",
+    "imgSrc": "/images/categories/handbags.png"
+  }
 ]
