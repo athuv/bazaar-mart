@@ -13,7 +13,7 @@ function FeaturedCarousel({ slider, scroll }: FeaturedImage) {
   return (
     <Carousel
       opts={{ align: "start", loop: true }}
-      className="mb-2 h-[25rem] w-full"
+      className="mb-2 h-fit w-full"
     >
       <CarouselContent>
         {slider.map((_image) => (
@@ -33,8 +33,8 @@ function FeaturedCarousel({ slider, scroll }: FeaturedImage) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="absolute top-64 h-40 w-full bg-gradient-to-b from-card via-background  blur-sm"></div>
-      <FeaturedScroll scroll={scroll} />
+      {/* <div className="absolute top-64 h-40 w-full bg-gradient-to-b from-card via-background  blur-sm"></div>
+       <FeaturedScroll scroll={scroll} /> */}
     </Carousel>
   );
 }
