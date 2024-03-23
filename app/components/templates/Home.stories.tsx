@@ -4,16 +4,16 @@ import { rest } from "msw";
 import mockLocationData from "@/lib/data/mswLocationByIp.json";
 import HomeTemplate from "./HomeTemplate";
 
-// const withTailwindClasses = (Story: StoryFn) => (
-//   <div className="w-screen bg-primary p-2">
-//     <Story />
-//   </div>
-// );
+const withTailwindClasses = (Story: StoryFn) => (
+  <div className="w-screen">
+    <Story />
+  </div>
+);
 
 const meta = {
   title: "templates/Home",
   component: HomeTemplate,
-  // decorators: [withTailwindClasses],
+  decorators: [withTailwindClasses],
   parameters: {
     layout: "fullscreen",
   },

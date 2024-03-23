@@ -6,7 +6,9 @@ function HomeTemplate() {
   return (
     <>
       <Header />
-      <Home />
+      <div className="px-2">
+        <Home />
+      </div>
     </>
   );
 }
