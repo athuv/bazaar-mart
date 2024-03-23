@@ -5,7 +5,7 @@ import React from "react";
 function LoginSignupSection() {
   return (
     <section className="w-screen">
-      <Separator />
+      {/* <Separator /> */}
       <LoginSignup />
       <Separator />
     </section>
