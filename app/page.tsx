@@ -1,3 +1,4 @@
+import BackToTopSection from "@/app/components/organisms/BackToTopSection";
 import CategoryHorizSection from "@/app/components/organisms/CategoryHorizSection";
 import DeliverySelectionSection from "@/app/components/organisms/DeliverySelectionSection";
 import FeaturedCarouselSection from "@/app/components/organisms/FeaturedCarouselSection";
@@ -14,6 +15,7 @@ export default function Home() {
       <FeaturedCarouselSection />
       <LoginSignupSection />
       <ProductListSection />
+      <BackToTopSection />
     </main>
   );
 }
