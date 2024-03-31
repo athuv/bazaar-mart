@@ -1,11 +1,15 @@
-import Header from "@/app/components/organisms/Header";
+import HeaderDektop from "@/app/components/organisms/HeaderDektop";
+import HeaderMobile from "@/app/components/organisms/HeaderMobile";
 import Home from "@/app/page";
 import React from "react";
 
 function HomeTemplate() {
   return (
     <>
-      <Header />
+      <header>
+        <HeaderMobile />
+        <HeaderDektop />
+      </header>
       <div className="px-2">
         <Home />
       </div>
