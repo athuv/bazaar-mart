@@ -8,7 +8,7 @@ function SearchInputAndButton() {
     <form action={search}>
       <div className="flex px-2 py-2">
         <Input
-          className="rounded-r-none border-r-0"
+          className="rounded-r-none border-0"
           aria-label="type search keyword"
           type="text"
           name="keyword"
