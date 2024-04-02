@@ -12,7 +12,7 @@ function CategoryHorizLink({
   return (
     <Button
       variant="link"
-      className="h-fit px-0 py-0 text-primary-foreground"
+      className="h-fit px-0 py-0 text-primary-foreground md:text-secondary-foreground"
       asChild
     >
       <Link className="px-0" href={link}>
