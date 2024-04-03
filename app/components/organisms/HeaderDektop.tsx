@@ -1,154 +1,103 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import Link from "next/link";
+
+import { DESKTOP_NAV_RIGHT } from "@/lib/configs/desktopUiConfig";
+import DeliveryLocationAndSearchBar from "@/app/components/molecules/DeliveryLocationAndSearchBar";
 import MobileLogo from "@/app/components/atoms/logo/MobileLogo";
+
 import { Button } from "@/app/components/atoms/shadcn/button";
-import { Input } from "@/app/components/atoms/shadcn/input";
-import { getNames, getCode } from "country-list";
-import {
-  CheckIcon,
-  ChevronDown,
-  Ellipsis,
-  MapPin,
-  Search,
-  ShoppingCart,
-  User,
-} from "lucide-react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/app/components/atoms/shadcn/popover";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/app/components/atoms/shadcn/command";
-import { ScrollArea } from "@/app/components/atoms/shadcn/scroll-area";
-import useDeliveryLocation from "@/app/_hooks/useDeliveryLocation";
-import { cn } from "@/lib/utils";
+  RadioGroup,
+  RadioGroupItem,
+} from "@/app/components/atoms/shadcn/radio-group";
+import { Label } from "@/app/components/atoms/shadcn/label";
+import { Badge } from "@/app/components/atoms/shadcn/badge";
+
+import { ChevronDown, Languages, ShoppingCart, User } from "lucide-react";
 
 function HeaderDektop() {
-  const [open, setOpen] = useState(false);
-  const { country, setCountry } = useDeliveryLocation();
+  const [openLangugae, setOpenLanguage] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
 
   return (
-    <div className="hidden h-14 items-center justify-between bg-primary text-primary-foreground md:flex md:px-8">
+    <div className="hidden h-14 items-center justify-between bg-primary px-32 text-primary-foreground md:flex">
       <div className="flex">
         <MobileLogo />
       </div>
-      <div className="flex flex-grow">
-        <Popover open={open} onOpenChange={setOpen}>
+      <DeliveryLocationAndSearchBar />
+
+      <div className="flex">
+        <Popover open={openLangugae} onOpenChange={setOpenLanguage}>
           <PopoverTrigger asChild>
-            <Button className="py-1">
-              <div>
-                <MapPin size={20} />
-              </div>
-              <div className="flex min-w-14 flex-col items-start">
-                <span className="text-xs">Deliver to</span>
-                <span className="w-full truncate text-start text-sm">
-                  {country.name || (
-                    <Ellipsis className="animate-pulse" size={20} />
-                  )}
+            <Button className="flex items-center gap-1">
+              <Languages size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
+              <div className="flex flex-col">
+                <span className="text-xs">
+                  {DESKTOP_NAV_RIGHT.LANGUAGE_LINK.SMALL_TEXT}
                 </span>
+                <div className="flex items-center gap-1">
+                  <span>{selectedLanguage.toUpperCase()}</span>
+                  <ChevronDown size={16} />
+                </div>
               </div>
             </Button>
           </PopoverTrigger>
-          <PopoverContent>
-            <Command>
-              <CommandInput placeholder="Search Country..." className="h-9" />
-              <CommandEmpty>No Country found.</CommandEmpty>
-              <ScrollArea>
-                <CommandList className="overflow-x-visible overflow-y-visible">
-                  <CommandGroup>
-                    {getNames()
-                      .sort()
-                      .map((_country) => (
-                        <CommandItem
-                          key={getCode(_country)}
-                          value={_country}
-                          onSelect={(currentValue) => {
-                            setCountry({
-                              name:
-                                currentValue === country.name
-                                  ? ""
-                                  : currentValue,
-                              code:
-                                currentValue === country.name
-                                  ? ""
-                                  : getCode(currentValue) || "",
-                            });
-                            setOpen(false);
-                          }}
-                        >
-                          <div className="flex items-center gap-2">
-                            <div className="h-auto w-5">
-                              <Image
-                                alt="country"
-                                src={`https://flagcdn.com/${getCode(_country)!.toLowerCase()}.svg`}
-                                width={1200}
-                                height={600}
-                              />
-                            </div>
-                            {_country}
-                          </div>
-
-                          <CheckIcon
-                            className={cn(
-                              "ml-auto h-4 w-4",
-                              country.name === _country
-                                ? "opacity-100"
-                                : "opacity-0",
-                            )}
-                          />
-                        </CommandItem>
-                      ))}
-                  </CommandGroup>
-                </CommandList>
-              </ScrollArea>
-            </Command>
+          <PopoverContent className="w-fit">
+            <RadioGroup defaultValue={selectedLanguage}>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem
+                  onClick={(e) => {
+                    const target = e.target as HTMLInputElement;
+                    setSelectedLanguage(target.value);
+                  }}
+                  value="en"
+                  id="option-one"
+                />
+                <Label htmlFor="option-one">English - EN</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem
+                  onClick={(e) => {
+                    const target = e.target as HTMLInputElement;
+                    setSelectedLanguage(target.value);
+                  }}
+                  value="de"
+                  id="option-two"
+                />
+                <Label htmlFor="option-two">Deutsch - DE</Label>
+              </div>
+            </RadioGroup>
           </PopoverContent>
         </Popover>
-        <Button variant="secondary" className="rounded-r-none">
-          All
+
+        <Button asChild>
+          <Link href="./">
+            <User size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
+            <div className="flex flex-col">
+              <span className="text-xs">
+                {DESKTOP_NAV_RIGHT.AUTH_LINK.SMALL_TEXT}
+              </span>
+              <span>{DESKTOP_NAV_RIGHT.AUTH_LINK.TEXT}</span>
+            </div>
+          </Link>
         </Button>
-        <Input className="rounded-none border-0" />
-        <Button
-          variant="secondary"
-          className="flex-grow rounded-l-none px-2"
-          size="icon"
-        >
-          <Search />
-        </Button>
-      </div>
-      <div className="flex">
-        <Button className="flex items-center gap-1">
-          <div className="h-auto w-7">
-            <Image
-              alt="country"
-              src={`https://flagcdn.com/us.svg`}
-              width={1200}
-              height={600}
-            />
-          </div>
-          <span>EN</span>
-          <ChevronDown size={16} />
-        </Button>
-        <Button className="flex flex-col">
-          <span>Sign in &</span>
-          <span>Register</span>
-        </Button>
-        <Button>
-          <User />
-          <span>Profile</span>
-        </Button>
-        <Button>
-          <ShoppingCart />
-          <span>Cart</span>
+        <Button className="flex gap-1" asChild>
+          <Link href="./">
+            <ShoppingCart size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
+            <div className="flex flex-col items-center">
+              <Badge className="py-0 text-xs" variant="secondary">
+                12
+              </Badge>
+              <span>{DESKTOP_NAV_RIGHT.CART_LINK.TEXT}</span>
+            </div>
+          </Link>
         </Button>
       </div>
     </div>
