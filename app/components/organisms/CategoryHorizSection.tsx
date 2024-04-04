@@ -4,7 +4,7 @@ import categories from "@/lib/data/categories.json";
 
 function CategoryHorizSection() {
   return (
-    <section className="flex w-screen bg-primary md:bg-secondary md:px-8">
+    <section className="flex w-screen bg-primary md:bg-secondary">
       <CategoryHorizList categoryList={categories} />
     </section>
   );
