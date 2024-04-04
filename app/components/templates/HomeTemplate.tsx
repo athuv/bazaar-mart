@@ -1,4 +1,4 @@
-import HeaderDektop from "@/app/components/organisms/desktop/HeaderDektop";
+import HeaderDektop from "@/app/components/organisms/desktop/HeaderDesktop";
 import HeaderMobile from "@/app/components/organisms/mobile/HeaderMobile";
 import Home from "@/app/page";
 import React from "react";
