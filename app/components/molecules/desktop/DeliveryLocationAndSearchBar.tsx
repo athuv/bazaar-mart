@@ -1,5 +1,14 @@
+"use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
+
+import { cn } from "@/lib/utils";
+import { getNames, getCode } from "country-list";
+import useDeliveryLocation from "@/app/_hooks/useDeliveryLocation";
+import { DELIVERY_LOCATION_AND_SEARCHBAR } from "@/lib/configs/desktopUiConfig";
+import categories from "@/lib/data/categories.json";
+
 import { Button } from "@/app/components/atoms/shadcn/button";
 import {
   Command,
@@ -16,15 +25,19 @@ import {
   PopoverTrigger,
 } from "@/app/components/atoms/shadcn/popover";
 import { ScrollArea } from "@/app/components/atoms/shadcn/scroll-area";
-import { CheckIcon, Ellipsis, MapPin, Search } from "lucide-react";
-import { getNames, getCode } from "country-list";
-import useDeliveryLocation from "@/app/_hooks/useDeliveryLocation";
-import { DELIVERY_LOCATION_AND_SEARCHBAR } from "@/lib/configs/desktopUiConfig";
-import { cn } from "@/lib/utils";
+import { CheckIcon, ChevronDown, Ellipsis, MapPin, Search } from "lucide-react";
 
 function DeliveryLocationAndSearchBar() {
   const [openLocation, setOpenLocation] = useState(false);
+  const [openCategory, setOpenCategory] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { country, setCountry } = useDeliveryLocation();
+  const {
+    DELIVERY_SELECTION_BUTTON_TEXT,
+    DELIVERY_SELECTION_BUTTON_ICON_SIZE,
+    SEARCHBAR_BUTTON_TEXT,
+  } = DELIVERY_LOCATION_AND_SEARCHBAR;
+
   return (
     <div className="flex flex-grow">
       <Popover open={openLocation} onOpenChange={setOpenLocation}>
@@ -34,9 +47,7 @@ function DeliveryLocationAndSearchBar() {
               <div className="flex gap-1">
                 <MapPin size={18} />
                 <span className="text-xs">
-                  {
-                    DELIVERY_LOCATION_AND_SEARCHBAR.DELIVERY_SELECTION_BUTTON_TEXT
-                  }
+                  {DELIVERY_SELECTION_BUTTON_TEXT}
                 </span>
               </div>
 
@@ -44,9 +55,7 @@ function DeliveryLocationAndSearchBar() {
                 {country.name || (
                   <Ellipsis
                     className="animate-pulse"
-                    size={
-                      DELIVERY_LOCATION_AND_SEARCHBAR.DELIVERY_SELECTION_BUTTON_ICON_SIZE
-                    }
+                    size={DELIVERY_SELECTION_BUTTON_ICON_SIZE}
                   />
                 )}
               </span>
@@ -107,10 +116,61 @@ function DeliveryLocationAndSearchBar() {
         </PopoverContent>
       </Popover>
       <div className="flex flex-grow">
-        <Button variant="secondary" className="rounded-r-none">
-          {DELIVERY_LOCATION_AND_SEARCHBAR.SEARCHBAR_BUTTON_TEXT}
-        </Button>
-        <Input aria-label="search keyword" className="rounded-none border-0" />
+        <Popover open={openCategory} onOpenChange={setOpenCategory}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="secondary"
+              className="flex items-center gap-1 rounded-r-none"
+            >
+              {/* All */}
+              <span>
+                {!selectedCategory ? SEARCHBAR_BUTTON_TEXT : selectedCategory}
+              </span>
+              <ChevronDown size={16} />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-fit">
+            <Command>
+              <ScrollArea>
+                <CommandList className="overflow-x-visible overflow-y-visible">
+                  <CommandGroup>
+                    {categories.map((_category) => {
+                      return (
+                        <CommandItem
+                          value={_category.category}
+                          onSelect={(currentValue) => {
+                            setSelectedCategory(currentValue);
+                            setOpenCategory(false);
+                          }}
+                          key={_category.id}
+                        >
+                          <div className="flex items-center gap-2">
+                            {_category.category}
+                          </div>
+                          <CheckIcon
+                            className={cn(
+                              "ml-auto h-4 w-4",
+                              selectedCategory === _category.category
+                                ? "opacity-100"
+                                : "opacity-0",
+                            )}
+                          />
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+                </CommandList>
+              </ScrollArea>
+            </Command>
+          </PopoverContent>
+        </Popover>
+
+        <Input
+          aria-label="search keyword"
+          type="text"
+          name="keyword"
+          className="rounded-none border-0 text-foreground"
+        />
         <Button
           variant="secondary"
           className="flex-grow rounded-l-none px-2"
