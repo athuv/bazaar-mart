@@ -1,4 +1,4 @@
-import DeliverySelectionDrawer from "@/app/components/molecules/DeliverySelectionDrawer";
+import DeliverySelectionDrawer from "@/app/components/molecules/mobile/DeliverySelectionDrawer";
 import React from "react";
 
 function DeliverySelectionSection() {

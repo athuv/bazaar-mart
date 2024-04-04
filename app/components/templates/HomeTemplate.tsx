@@ -1,5 +1,5 @@
-import HeaderDektop from "@/app/components/organisms/HeaderDektop";
-import HeaderMobile from "@/app/components/organisms/HeaderMobile";
+import HeaderDektop from "@/app/components/organisms/desktop/HeaderDektop";
+import HeaderMobile from "@/app/components/organisms/mobile/HeaderMobile";
 import Home from "@/app/page";
 import React from "react";
 

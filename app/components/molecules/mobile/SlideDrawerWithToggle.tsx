@@ -11,8 +11,8 @@ import { Button } from "@/app/components/atoms/shadcn/button";
 import MobileLogo from "@/app/components/atoms/logo/MobileLogo";
 import Link from "next/link";
 import { Category } from "@/lib/types/categoryTypes";
-import PopularCategories from "@/app/components/molecules/PopularCategories";
-import SlideDrawerSettings from "@/app/components/molecules/SlideDrawerSettings";
+import PopularCategories from "@/app/components/molecules/mobile/PopularCategories";
+import SlideDrawerSettings from "@/app/components/molecules/mobile/SlideDrawerSettings";
 import { X } from "lucide-react";
 
 function SlideDrawerWithToggle({ categoryList }: Category) {

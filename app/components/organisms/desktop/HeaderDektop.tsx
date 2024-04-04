@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { DESKTOP_NAV_RIGHT } from "@/lib/configs/desktopUiConfig";
-import DeliveryLocationAndSearchBar from "@/app/components/molecules/DeliveryLocationAndSearchBar";
+import DeliveryLocationAndSearchBar from "@/app/components/molecules/desktop/DeliveryLocationAndSearchBar";
 import MobileLogo from "@/app/components/atoms/logo/MobileLogo";
 
 import { Button } from "@/app/components/atoms/shadcn/button";

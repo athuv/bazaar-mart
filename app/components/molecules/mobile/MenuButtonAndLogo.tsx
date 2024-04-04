@@ -1,5 +1,5 @@
 import MobileLogo from "@/app/components/atoms/logo/MobileLogo";
-import SlideDrawerWithToggle from "@/app/components/molecules/SlideDrawerWithToggle";
+import SlideDrawerWithToggle from "@/app/components/molecules/mobile/SlideDrawerWithToggle";
 import categories from "@/lib/data/categories.json";
 import React from "react";
 
