@@ -3,22 +3,26 @@
     {
       "id": "001",
       "alt": "image-01",
-      "src": "/images/featured/1.jpg"
+      "srcMobile": "/images/featured/1.jpg",
+      "srcDesktop": "/images/featured/d1.jpg"
     },
     {
       "id": "002",
       "alt": "image-02",
-      "src": "/images/featured/2.jpg"
+      "srcMobile": "/images/featured/2.jpg",
+      "srcDesktop": "/images/featured/d2.jpg"
     },
     {
       "id": "003",
       "alt": "image-03",
-      "src": "/images/featured/3.jpg"
+      "srcMobile": "/images/featured/3.jpg",
+      "srcDesktop": "/images/featured/d3.jpg"
     },
     {
       "id": "004",
       "alt": "image-04",
-      "src": "/images/featured/4.jpg"
+      "srcMobile": "/images/featured/4.jpg",
+      "srcDesktop": "/images/featured/d4.jpg"
     }
   ],
   "scroll": [
