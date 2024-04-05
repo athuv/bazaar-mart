@@ -4,8 +4,15 @@ export interface Image {
   src: string;
 }
 
+export interface ResponsiveImage {
+  id: string;
+  alt: string;
+  srcMobile: string;
+  srcDesktop: string;
+}
+
 export interface FeaturedImage {
-  slider: Image[];
+  slider: ResponsiveImage[];
   scroll: Image[];
 }
 
