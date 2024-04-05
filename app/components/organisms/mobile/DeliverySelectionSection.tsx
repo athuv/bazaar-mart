@@ -3,7 +3,7 @@ import React from "react";
 
 function DeliverySelectionSection() {
   return (
-    <section className="w-screen bg-secondary md:hidden">
+    <section className="w-screen bg-secondary lg:hidden">
       <DeliverySelectionDrawer />
     </section>
   );

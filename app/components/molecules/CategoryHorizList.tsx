@@ -12,8 +12,8 @@ import { Menu } from "lucide-react";
 function CategoryHorizList({ categoryList }: Category) {
   return (
     <ScrollArea>
-      <div className="flex h-fit flex-grow items-center gap-3 px-2 py-2 pb-[0.85rem] md:px-32 md:py-1">
-        <div className="hidden md:block">
+      <div className="flex h-fit flex-grow items-center gap-3 px-2 py-2 pb-[0.85rem] lg:px-16 lg:py-1">
+        <div className="hidden lg:block">
           <Button
             className="flex h-fit w-fit items-center gap-1 px-1"
             variant="ghost"

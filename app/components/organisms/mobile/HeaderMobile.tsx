@@ -4,7 +4,7 @@ import React from "react";
 
 function Header() {
   return (
-    <div className="bg-primary px-2 md:hidden">
+    <div className="bg-primary px-2 lg:hidden">
       <div className="flex justify-between">
         <MenuButtonAndLogo />
         <ProfileAndCartLink />
