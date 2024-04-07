@@ -1,4 +1,6 @@
-import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+
 import { Button } from "@/app/components/atoms/shadcn/button";
 import {
   Card,
@@ -6,9 +8,10 @@ import {
   CardDescription,
   CardHeader,
 } from "@/app/components/atoms/shadcn/card";
-import Image from "next/image";
-import Link from "next/link";
+
 import { Product } from "@/lib/types/types";
+import { Star } from "lucide-react";
+import StarRatings from "react-star-ratings";
 
 function ProductList({ productList }: Product) {
   return (
@@ -54,6 +57,16 @@ function ProductList({ productList }: Product) {
                       {`${_product.discountPercentage}%`} off
                     </span>
                   </CardDescription>
+                  <div className="flex items-center">
+                    <Star size={12} color="none" fill="rgb(250 204 21 / 1)" />
+                    <Star size={12} color="none" fill="rgb(250 204 21 / 1)" />
+                    <Star size={12} color="none" fill="rgb(250 204 21 / 1)" />
+                    <Star size={12} color="none" fill="rgb(250 204 21 / 1)" />
+                    <Star size={12} color="none" fill="rgb(250 204 21 / 1)" />
+                    <span className="text-[8px] text-muted-foreground">
+                      (320)
+                    </span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
