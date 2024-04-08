@@ -1,6 +1,5 @@
 import BackToTopSection from "@/app/components/organisms/BackToTopSection";
 import CategoryHorizSection from "@/app/components/organisms/CategoryHorizSection";
-import DeliverySelectionSection from "@/app/components/organisms/mobile/DeliverySelectionSection";
 import FeaturedCarouselSection from "@/app/components/organisms/FeaturedCarouselSection";
 import LoginSignupSection from "@/app/components/organisms/mobile/LoginSignupSection";
 import ProductListSection from "@/app/components/organisms/mobile/ProductListSection";
@@ -11,7 +10,6 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center ">
       <SearchSection />
       <CategoryHorizSection />
-      <DeliverySelectionSection />
       <FeaturedCarouselSection />
       <LoginSignupSection />
       <ProductListSection />
