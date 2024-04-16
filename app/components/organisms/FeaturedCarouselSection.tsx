@@ -4,7 +4,7 @@ import FeaturedCarousel from "@/app/components/molecules/FeaturedCarousel";
 
 function FeaturedCarouselSection() {
   return (
-    <section className="w-screen">
+    <section className="w-full">
       <FeaturedCarousel
         slider={featuredImages.slider}
         scroll={featuredImages.scroll}

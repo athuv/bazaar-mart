@@ -4,7 +4,7 @@ import productList from "@/lib/data/productList.json";
 
 function ProductListSection() {
   return (
-    <section className="w-screen">
+    <section className="w-full">
       <ProductList productList={productList} />
     </section>
   );

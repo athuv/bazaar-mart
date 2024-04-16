@@ -13,7 +13,7 @@ function BackToTopButton() {
     <Button
       onClick={handleBackToTop}
       variant="secondary"
-      className="flex h-12 w-screen flex-col rounded-none"
+      className="flex h-12 w-full flex-col rounded-none"
     >
       <ChevronUp />
       <span>Back To Top</span>

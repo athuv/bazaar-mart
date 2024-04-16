@@ -6,12 +6,14 @@ import HeaderRightContent from "@/app/components/molecules/desktop/HeaderRightCo
 
 function HeaderDektop() {
   return (
-    <div className="hidden h-14 items-center justify-between bg-primary px-16 text-primary-foreground lg:flex">
-      <div className="flex">
-        <MobileLogo />
+    <div className="hidden w-screen bg-primary text-primary-foreground lg:block">
+      <div className="flex h-14 items-center justify-between lg:mx-auto lg:max-w-6xl lg:px-2 xl:max-w-7xl">
+        <div className="flex">
+          <MobileLogo />
+        </div>
+        <DeliveryLocationAndSearchBar />
+        <HeaderRightContent />
       </div>
-      <DeliveryLocationAndSearchBar />
-      <HeaderRightContent />
     </div>
   );
 }

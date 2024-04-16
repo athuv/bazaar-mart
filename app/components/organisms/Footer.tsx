@@ -7,7 +7,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="w-screen bg-primary px-2 py-2">
+    <footer className="w-full bg-primary px-2 py-2">
       <section className="w-full">
         <FooterUpper />
       </section>

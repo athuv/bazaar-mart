@@ -7,7 +7,7 @@ import SearchSection from "@/app/components/organisms/mobile/SearchSection";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center ">
+    <main className="flex min-h-svh w-full flex-col lg:mx-auto lg:max-w-6xl xl:max-w-7xl">
       <SearchSection />
       <CategoryHorizSection />
       <FeaturedCarouselSection />
@@ -15,5 +15,13 @@ export default function Home() {
       <ProductListSection />
       <BackToTopSection />
     </main>
+    // <main className="flex min-h-screen w-svw flex-col items-center ">
+    //   <SearchSection />
+    //   <CategoryHorizSection />
+    //   <FeaturedCarouselSection />
+    //   <LoginSignupSection />
+    //   <ProductListSection />
+    //   <BackToTopSection />
+    // </main>
   );
 }

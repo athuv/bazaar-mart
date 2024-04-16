@@ -3,7 +3,7 @@ import React from "react";
 
 function BackToTopSection() {
   return (
-    <section className="w-screen">
+    <section className="w-full">
       <BackToTop />
     </section>
   );
