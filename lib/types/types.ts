@@ -13,7 +13,6 @@ export interface ResponsiveImage {
 
 export interface FeaturedImage {
   slider: ResponsiveImage[];
-  scroll: Image[];
 }
 
 export interface ScrollImage {
