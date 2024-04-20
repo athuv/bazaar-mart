@@ -1,12 +1,13 @@
 import Image from "next/image";
 
+import { FeaturedImage } from "@/lib/types/types";
+
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/app/components/atoms/shadcn/carousel";
 
-import { FeaturedImage } from "@/lib/types/types";
 import CategoryListCard from "@/app/components/molecules/desktop/CategoryListCard";
 
 function FeaturedCarousel({ slider }: FeaturedImage) {
