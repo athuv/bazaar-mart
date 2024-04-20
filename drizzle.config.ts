@@ -4,7 +4,7 @@ import { loadEnvConfig } from "@next/env";
 loadEnvConfig("./");
 
 export default defineConfig({
-  schema: "./lib/db/drizzle/schema.ts",
+  schema: "./lib/db/drizzle/schemas/*",
   out: "./lib/db/drizzle/migrations",
   driver: "pg",
   dbCredentials: {
