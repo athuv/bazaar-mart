@@ -4,7 +4,7 @@ async function getCarouselImage() {
   const response = await fetch(
     `${process.env.BASE_URL}api/v1/carouselContent`,
     {
-      cache: "force-cache",
+      cache: "no-store",
     },
   );
 

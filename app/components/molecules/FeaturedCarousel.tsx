@@ -14,21 +14,21 @@ function FeaturedCarousel({ slider }: FeaturedImage) {
     <div className="gap-2 lg:flex lg:h-fit lg:justify-center lg:px-2 lg:py-4">
       <CategoryListCard />
 
-      <div className="flex items-center lg:rounded-md lg:bg-secondary">
+      <div className="flex items-center lg:max-h-[402px] lg:w-full lg:rounded-md lg:bg-secondary">
         <Carousel
           opts={{ align: "start", loop: true }}
           className="lg:fit mb-2 h-fit w-full lg:mb-0"
         >
           <CarouselContent>
             {slider.map((_image) => (
-              <CarouselItem className="lg:flex-grow" key={_image.id}>
+              <CarouselItem className="lg:flex-grow" key={_image.sliderImageId}>
                 <picture>
                   <source
-                    srcSet={_image.srcMobile}
+                    srcSet={`/images/featured/${_image.imageMobile}`}
                     media="(max-width: 768px)"
                   />
                   <source
-                    srcSet={_image.srcDesktop}
+                    srcSet={`/images/featured/${_image.imageDesktop}`}
                     media="(min-width: 768px)"
                   />
                   <Image
