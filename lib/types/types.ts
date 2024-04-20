@@ -5,10 +5,10 @@ export interface Image {
 }
 
 export interface ResponsiveImage {
-  id: string;
-  alt: string;
-  srcMobile: string;
-  srcDesktop: string;
+  sliderImageId: number;
+  imageAlt: string;
+  imageMobile: string;
+  imageDesktop: string;
 }
 
 export interface FeaturedImage {
