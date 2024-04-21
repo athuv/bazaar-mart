@@ -11,7 +11,6 @@ import {
 
 import { Product } from "@/lib/types/types";
 import { Star } from "lucide-react";
-import StarRatings from "react-star-ratings";
 
 function ProductList({ productList }: Product) {
   return (
