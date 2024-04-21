@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/app/components/atoms/shadcn/button";
+import { Button } from "@/app/_components/atoms/shadcn/button";
 import { ChevronUp } from "lucide-react";
 import React, { ReactNode } from "react";
 

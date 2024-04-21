@@ -1,7 +1,7 @@
-import { Button } from "@/app/components/atoms/shadcn/button";
-import { Separator } from "@/app/components/atoms/shadcn/separator";
-import FooterLower from "@/app/components/molecules/FooterLower";
-import FooterUpper from "@/app/components/molecules/FooterUpper";
+import { Button } from "@/app/_components/atoms/shadcn/button";
+import { Separator } from "@/app/_components/atoms/shadcn/separator";
+import FooterLower from "@/app/_components/molecules/FooterLower";
+import FooterUpper from "@/app/_components/molecules/FooterUpper";
 import Link from "next/link";
 import React from "react";
 

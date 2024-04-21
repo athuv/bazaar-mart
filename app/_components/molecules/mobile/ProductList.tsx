@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "@/app/components/atoms/shadcn/button";
+import { Button } from "@/app/_components/atoms/shadcn/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-} from "@/app/components/atoms/shadcn/card";
+} from "@/app/_components/atoms/shadcn/card";
 
 import { Product } from "@/lib/types/types";
 import { Star } from "lucide-react";

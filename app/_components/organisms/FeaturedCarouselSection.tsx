@@ -1,4 +1,4 @@
-import FeaturedCarousel from "@/app/components/molecules/FeaturedCarousel";
+import FeaturedCarousel from "@/app/_components/molecules/FeaturedCarousel";
 
 async function getCarouselImage() {
   const response = await fetch(

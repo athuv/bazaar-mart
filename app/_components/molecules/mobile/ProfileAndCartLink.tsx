@@ -1,5 +1,5 @@
-import CartLink from "@/app/components/atoms/links/CartLink";
-import ProfileLink from "@/app/components/atoms/links/ProfileLink";
+import CartLink from "@/app/_components/atoms/links/CartLink";
+import ProfileLink from "@/app/_components/atoms/links/ProfileLink";
 import React from "react";
 
 function ProfileAndCartLink() {

@@ -6,9 +6,9 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/app/components/atoms/shadcn/carousel";
+} from "@/app/_components/atoms/shadcn/carousel";
 
-import CategoryListCard from "@/app/components/molecules/desktop/CategoryListCard";
+import CategoryListCard from "@/app/_components/molecules/desktop/CategoryListCard";
 
 function FeaturedCarousel({ slider }: FeaturedImage) {
   return (

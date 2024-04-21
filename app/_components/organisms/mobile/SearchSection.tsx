@@ -1,4 +1,4 @@
-import SearchInputAndButton from "@/app/components/molecules/mobile/SearchInputAndButton";
+import SearchInputAndButton from "@/app/_components/molecules/mobile/SearchInputAndButton";
 import React from "react";
 
 function SearchSection() {

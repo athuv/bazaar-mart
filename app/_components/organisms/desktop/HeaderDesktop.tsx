@@ -1,8 +1,8 @@
 import React from "react";
 
-import DeliveryLocationAndSearchBar from "@/app/components/molecules/desktop/DeliveryLocationAndSearchBar";
-import MobileLogo from "@/app/components/atoms/logo/MobileLogo";
-import HeaderRightContent from "@/app/components/molecules/desktop/HeaderRightContent";
+import DeliveryLocationAndSearchBar from "@/app/_components/molecules/desktop/DeliveryLocationAndSearchBar";
+import MobileLogo from "@/app/_components/atoms/logo/MobileLogo";
+import HeaderRightContent from "@/app/_components/molecules/desktop/HeaderRightContent";
 
 function HeaderDektop() {
   return (

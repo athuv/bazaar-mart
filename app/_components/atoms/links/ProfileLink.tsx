@@ -1,4 +1,4 @@
-import { Button } from "@/app/components/atoms/shadcn/button";
+import { Button } from "@/app/_components/atoms/shadcn/button";
 import { cn } from "@/lib/utils";
 import { User } from "lucide-react";
 import Link from "next/link";

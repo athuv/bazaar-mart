@@ -1,12 +1,12 @@
 import React from "react";
 
-import CategoryHorizLink from "@/app/components/atoms/links/CategoryHorizLink";
+import CategoryHorizLink from "@/app/_components/atoms/links/CategoryHorizLink";
 import {
   ScrollArea,
   ScrollBar,
-} from "@/app/components/atoms/shadcn/scroll-area";
+} from "@/app/_components/atoms/shadcn/scroll-area";
 import { Category } from "@/lib/types/categoryTypes";
-import { Button } from "@/app/components/atoms/shadcn/button";
+import { Button } from "@/app/_components/atoms/shadcn/button";
 import { Menu } from "lucide-react";
 
 function CategoryHorizList({ categoryList }: Category) {

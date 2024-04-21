@@ -1,5 +1,5 @@
-import MenuButtonAndLogo from "@/app/components/molecules/mobile/MenuButtonAndLogo";
-import ProfileAndCartLink from "@/app/components/molecules/mobile/ProfileAndCartLink";
+import MenuButtonAndLogo from "@/app/_components/molecules/mobile/MenuButtonAndLogo";
+import ProfileAndCartLink from "@/app/_components/molecules/mobile/ProfileAndCartLink";
 import React from "react";
 
 function Header() {

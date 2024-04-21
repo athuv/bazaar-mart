@@ -1,4 +1,4 @@
-import CategoryHorizList from "@/app/components/molecules/CategoryHorizList";
+import CategoryHorizList from "@/app/_components/molecules/CategoryHorizList";
 import React from "react";
 import categories from "@/lib/data/categories.json";
 

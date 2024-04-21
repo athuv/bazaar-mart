@@ -2,8 +2,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/app/components/atoms/shadcn/avatar";
-import { Button } from "@/app/components/atoms/shadcn/button";
+} from "@/app/_components/atoms/shadcn/avatar";
+import { Button } from "@/app/_components/atoms/shadcn/button";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";

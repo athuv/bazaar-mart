@@ -1,6 +1,6 @@
 import React from "react";
-import { Input } from "@/app/components/atoms/shadcn/input";
-import SearchButton from "@/app/components/atoms/buttons/SearchButton";
+import { Input } from "@/app/_components/atoms/shadcn/input";
+import SearchButton from "@/app/_components/atoms/buttons/SearchButton";
 import search from "@/lib/actions/submitSearchForm";
 
 function SearchInputAndButton() {

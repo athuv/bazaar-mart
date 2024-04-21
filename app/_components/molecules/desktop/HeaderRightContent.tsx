@@ -5,18 +5,18 @@ import Link from "next/link";
 
 import { DESKTOP_NAV_RIGHT } from "@/lib/configs/desktopUiConfig";
 
-import { Button } from "@/app/components/atoms/shadcn/button";
+import { Button } from "@/app/_components/atoms/shadcn/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/app/components/atoms/shadcn/popover";
+} from "@/app/_components/atoms/shadcn/popover";
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/app/components/atoms/shadcn/radio-group";
-import { Label } from "@/app/components/atoms/shadcn/label";
-import { Badge } from "@/app/components/atoms/shadcn/badge";
+} from "@/app/_components/atoms/shadcn/radio-group";
+import { Label } from "@/app/_components/atoms/shadcn/label";
+import { Badge } from "@/app/_components/atoms/shadcn/badge";
 
 import { ChevronDown, Languages, ShoppingCart, User } from "lucide-react";
 

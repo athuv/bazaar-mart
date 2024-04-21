@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@/app/components/atoms/shadcn/button";
+import { Button, ButtonProps } from "@/app/_components/atoms/shadcn/button";
 import { Menu } from "lucide-react";
 import React from "react";
 

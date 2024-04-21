@@ -1,4 +1,4 @@
-import BackToTop from "@/app/components/molecules/BackToTop";
+import BackToTop from "@/app/_components/molecules/BackToTop";
 import React from "react";
 
 function BackToTopSection() {

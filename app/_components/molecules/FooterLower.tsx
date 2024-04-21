@@ -1,4 +1,4 @@
-import { Button } from "@/app/components/atoms/shadcn/button";
+import { Button } from "@/app/_components/atoms/shadcn/button";
 import Link from "next/link";
 import React from "react";
 

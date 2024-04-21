@@ -1,9 +1,9 @@
-import BackToTopSection from "@/app/components/organisms/BackToTopSection";
-import CategoryHorizSection from "@/app/components/organisms/CategoryHorizSection";
-import FeaturedCarouselSection from "@/app/components/organisms/FeaturedCarouselSection";
-import LoginSignupSection from "@/app/components/organisms/mobile/LoginSignupSection";
-import ProductListSection from "@/app/components/organisms/mobile/ProductListSection";
-import SearchSection from "@/app/components/organisms/mobile/SearchSection";
+import BackToTopSection from "@/app/_components/organisms/BackToTopSection";
+import CategoryHorizSection from "@/app/_components/organisms/CategoryHorizSection";
+import FeaturedCarouselSection from "@/app/_components/organisms/FeaturedCarouselSection";
+import LoginSignupSection from "@/app/_components/organisms/mobile/LoginSignupSection";
+import ProductListSection from "@/app/_components/organisms/mobile/ProductListSection";
+import SearchSection from "@/app/_components/organisms/mobile/SearchSection";
 
 export default function Home() {
   return (

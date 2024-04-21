@@ -1,4 +1,4 @@
-import ProductList from "@/app/components/molecules/mobile/ProductList";
+import ProductList from "@/app/_components/molecules/mobile/ProductList";
 import React from "react";
 import productList from "@/lib/data/productList.json";
 
