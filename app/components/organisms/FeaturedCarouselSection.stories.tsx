@@ -1,5 +1,7 @@
-import type { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { rest } from "msw";
 
+import mswMockData from "@/lib/data/mswMockData.json";
 import FeaturedCarouselSection from "./FeaturedCarouselSection";
 
 const meta = {
@@ -15,4 +17,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FeaturedCarouselSectionComp: Story = {};
+export const FeaturedCarouselSectionComp: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        rest.get("api/v1/carouselContent", (req, res, ctx) =>
+          res(ctx.json(mswMockData.slider)),
+        ),
+      ],
+    },
+  },
+};

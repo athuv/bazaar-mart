@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { rest } from "msw";
 
-import mockLocationData from "@/lib/data/mswLocationByIp.json";
+import mswMockData from "@/lib/data/mswMockData.json";
 import HeaderDektop from "./HeaderDesktop";
 
 // const withTailwindClasses = (Story: StoryFn) => (
@@ -31,7 +31,7 @@ export const DesktopHeader: Story = {
     msw: {
       handlers: [
         rest.get("api/v1/deliveryLocation", (req, res, ctx) =>
-          res(ctx.json(mockLocationData)),
+          res(ctx.json(mswMockData.data)),
         ),
       ],
     },
