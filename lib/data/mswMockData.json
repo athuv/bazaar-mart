@@ -1,0 +1,70 @@
+{
+  "data": {
+    "status": "success",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "region": "1",
+    "regionName": "Western Province",
+    "city": "Nugegoda",
+    "zip": "10250",
+    "lat": 6.8719,
+    "lon": 79.8939,
+    "timezone": "Asia/Colombo",
+    "isp": "SLTADSL-SLT",
+    "org": "",
+    "as": "AS9329 Sri Lanka Telecom Internet",
+    "query": "112.134.223.14"
+  },
+  "slider": [
+    {
+      "sliderImageId": 1,
+      "userId": 1,
+      "imageMobile": "1.webp",
+      "imageAlt": "first",
+      "imageDesktop": "d1.webp",
+      "isActive": true,
+      "createdAt": "2024-04-20T15:01:48.808Z",
+      "updatedAt": "2024-04-20T15:01:48.808Z"
+    },
+    {
+      "sliderImageId": 2,
+      "userId": 1,
+      "imageMobile": "2.webp",
+      "imageAlt": "third",
+      "imageDesktop": "d2.webp",
+      "isActive": true,
+      "createdAt": "2024-04-20T15:02:12.353Z",
+      "updatedAt": "2024-04-20T15:02:12.353Z"
+    },
+    {
+      "sliderImageId": 3,
+      "userId": 1,
+      "imageMobile": "3.jpeg",
+      "imageAlt": "second",
+      "imageDesktop": "d3.webp",
+      "isActive": true,
+      "createdAt": "2024-04-20T15:02:48.850Z",
+      "updatedAt": "2024-04-20T15:02:48.850Z"
+    },
+    {
+      "sliderImageId": 4,
+      "userId": 1,
+      "imageMobile": "4.webp",
+      "imageAlt": "fourth",
+      "imageDesktop": "d4.webp",
+      "isActive": true,
+      "createdAt": "2024-04-20T15:03:13.041Z",
+      "updatedAt": "2024-04-20T15:03:13.041Z"
+    },
+    {
+      "sliderImageId": 5,
+      "userId": 1,
+      "imageMobile": "5.webp",
+      "imageAlt": "fifth",
+      "imageDesktop": "d5.webp",
+      "isActive": true,
+      "createdAt": "2024-04-20T15:04:00.137Z",
+      "updatedAt": "2024-04-20T15:04:00.137Z"
+    }
+  ]
+}
