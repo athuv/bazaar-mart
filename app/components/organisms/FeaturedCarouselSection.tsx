@@ -2,10 +2,7 @@ import FeaturedCarousel from "@/app/components/molecules/FeaturedCarousel";
 
 async function getCarouselImage() {
   const response = await fetch(
-    `${process.env.BASE_URL}api/v1/carouselContent`,
-    {
-      cache: "default",
-    },
+    `${process.env.BASE_URL}api/v1/carouselContent/`,
   );
 
   if (!response.ok) {
