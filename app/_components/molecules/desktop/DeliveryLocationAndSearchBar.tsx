@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { getNames, getCode } from "country-list";
 import useDeliveryLocation from "@/app/_hooks/useDeliveryLocation";
+import useCategories from "@/app/_hooks/useCategories";
 import { DELIVERY_LOCATION_AND_SEARCHBAR } from "@/lib/configs/desktopUiConfig";
-import categories from "@/lib/data/categories.json";
 
 import { Button } from "@/app/_components/atoms/shadcn/button";
 import {
@@ -25,6 +25,7 @@ import {
   PopoverTrigger,
 } from "@/app/_components/atoms/shadcn/popover";
 import { ScrollArea } from "@/app/_components/atoms/shadcn/scroll-area";
+
 import { CheckIcon, ChevronDown, Ellipsis, MapPin, Search } from "lucide-react";
 
 function DeliveryLocationAndSearchBar() {
@@ -32,6 +33,7 @@ function DeliveryLocationAndSearchBar() {
   const [openCategory, setOpenCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { country, setCountry } = useDeliveryLocation();
+  const { mainCategories } = useCategories({ limit: 0 });
   const {
     DELIVERY_SELECTION_BUTTON_TEXT,
     DELIVERY_SELECTION_BUTTON_ICON_SIZE,
@@ -134,23 +136,23 @@ function DeliveryLocationAndSearchBar() {
               <ScrollArea>
                 <CommandList className="overflow-x-visible overflow-y-visible">
                   <CommandGroup>
-                    {categories.map((_category) => {
+                    {mainCategories.map((_category) => {
                       return (
                         <CommandItem
-                          value={_category.category}
+                          value={_category.categoryName}
                           onSelect={(currentValue) => {
                             setSelectedCategory(currentValue);
                             setOpenCategory(false);
                           }}
-                          key={_category.id}
+                          key={_category.categoryId}
                         >
                           <div className="flex items-center gap-2">
-                            {_category.category}
+                            {_category.categoryName}
                           </div>
                           <CheckIcon
                             className={cn(
                               "ml-auto h-4 w-4",
-                              selectedCategory === _category.category
+                              selectedCategory === _category.categoryName
                                 ? "opacity-100"
                                 : "opacity-0",
                             )}

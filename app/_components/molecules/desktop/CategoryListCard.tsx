@@ -1,12 +1,9 @@
 "use client";
 
-import {
-  Dispatch,
-  ElementType,
-  ReactNode,
-  SetStateAction,
-  useState,
-} from "react";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import Image from "next/image";
+
+import useCategories from "@/app/_hooks/useCategories";
 
 import { Button } from "@/app/_components/atoms/shadcn/button";
 import {
@@ -14,63 +11,21 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/app/_components/atoms/shadcn/dropdown-menu";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/app/_components/atoms/shadcn/popover";
-
-import {
-  Baby,
-  Bike,
-  Car,
-  ChevronRight,
-  Gem,
-  HeartPulse,
-  MonitorSmartphone,
-  Plug2,
-  Refrigerator,
-  Shirt,
-  ShoppingBasket,
-  Sofa,
-  Watch,
-} from "lucide-react";
-import Link from "next/link";
 import { Separator } from "@radix-ui/react-separator";
+import { ChevronRight } from "lucide-react";
 
 interface CategoryButtonProps {
   categoryName: string;
   categoryId: number;
-  icon: ElementType;
+  icon: string;
   setSelectedCategory: Dispatch<SetStateAction<number | null>>;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-interface CategoriesProps {
-  id: number;
-  name: string;
-  icon: ElementType;
-}
-
-const categories: CategoriesProps[] = [
-  { id: 1, name: "Electronic Accessories", icon: Plug2 },
-  { id: 2, name: "Electronic Devices", icon: MonitorSmartphone },
-  { id: 3, name: "TV & Home Appliances", icon: Refrigerator },
-  { id: 4, name: "Health & Beauty", icon: HeartPulse },
-  { id: 5, name: "Babies & Toys", icon: Baby },
-  { id: 6, name: "Groceries & Pets", icon: ShoppingBasket },
-  { id: 7, name: "Home & Lifestyle", icon: Sofa },
-  { id: 8, name: "Women's Fashion", icon: Gem },
-  { id: 9, name: "Men's Fashion", icon: Shirt },
-  { id: 10, name: "Watches & Accessories", icon: Watch },
-  { id: 11, name: "Sports & Outdoor", icon: Car },
-  { id: 12, name: "Automotive & Motorbike", icon: Bike },
-];
-
 function CategoryButton({
   categoryName,
   categoryId,
-  icon: Icon,
+  icon,
   setSelectedCategory,
   setOpen,
 }: CategoryButtonProps) {
@@ -85,7 +40,8 @@ function CategoryButton({
       variant="ghost"
     >
       <div className="flex items-center gap-2">
-        <Icon className="h-4 w-4" />
+        {/* <Icon className="h-4 w-4" /> */}
+        <Image src={icon} alt={categoryName} height={16} width={16} />
         <span className="text-xs">{categoryName}</span>
       </div>
       <ChevronRight size={14} className="invisible group-hover:visible" />
@@ -175,23 +131,25 @@ function CategoryContent({
 function CategoryListCard() {
   const [open, setOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const { mainCategories } = useCategories({ limit: 0 });
 
   return (
     <div
       onMouseLeave={() => setOpen(false)}
-      className="hidden rounded-md border lg:flex lg:h-auto lg:w-72 lg:flex-col"
+      className="hidden rounded-md border lg:flex lg:min-h-[402px] lg:w-72 lg:flex-col"
     >
       {/* <h4 className="p-2 font-semibold">Categories</h4> */}
 
       <DropdownMenu open={open}>
         <DropdownMenuTrigger asChild>
           <div className="flex flex-col px-2 py-4 lg:py-2">
-            {categories.map((_category) => (
+            {mainCategories.length <= 0 && <div>loading...</div>}
+            {mainCategories.map((_category) => (
               <CategoryButton
-                key={_category.id}
-                categoryName={_category.name}
-                categoryId={_category.id}
-                icon={_category.icon}
+                key={_category.categoryId}
+                categoryName={_category.categoryName}
+                categoryId={_category.categoryId}
+                icon={_category.iconDataURL || "/"}
                 setSelectedCategory={setSelectedCategory}
                 setOpen={setOpen}
               />
