@@ -51,3 +51,7 @@ export interface Category {
 export type GetMainCategories = {
   limit?: number;
 };
+
+export interface CategoriesHook {
+  mainCategories: Category[];
+}
