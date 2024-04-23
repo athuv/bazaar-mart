@@ -1,3 +1,6 @@
+import { Country } from "country-list";
+import { Dispatch, SetStateAction } from "react";
+
 export interface Image {
   id: string;
   alt: string;
@@ -32,3 +35,23 @@ export interface ProductList {
 export interface Product {
   productList: ProductList[];
 }
+
+export interface DeliveryLocation {
+  setShowCountries: Dispatch<SetStateAction<boolean>>;
+  showCountries: boolean;
+  country: Country;
+  setCountry: Dispatch<SetStateAction<Country>>;
+  filter: string;
+  setFilter: Dispatch<SetStateAction<string>>;
+}
+
+export interface Category {
+  categoryId: number;
+  categoryName: string;
+  parentId: number | null;
+  iconDataURL: string;
+}
+
+export type GetMainCategories = {
+  limit?: number;
+};
