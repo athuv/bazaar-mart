@@ -10,7 +10,25 @@ import Image from "next/image";
 import React from "react";
 import { Category } from "@/lib/types/categoryTypes";
 
-function PopularCategories({ categoryList }: Category) {
+async function getMainCategories(): Promise<Category[]> {
+  const response = await fetch(
+    `${process.env.BASE_URL}api/v1/categories?type=main&limit=5`,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data = await response.json();
+  return data.mainCategories;
+}
+
+async function PopularCategories() {
+  const mainCategories: Category[] = await getMainCategories();
+
   return (
     <div className="p-3">
       <div>
@@ -25,26 +43,33 @@ function PopularCategories({ categoryList }: Category) {
         </Button>
       </div>
       <div className="flex flex-col gap-2 pt-3">
-        {categoryList.map((_category) => {
+        {mainCategories.map((_category) => {
           return (
-            <div key={_category.id} className="flex items-center gap-2">
-              <Avatar>
-                <AvatarImage src={_category.imgSrc} asChild>
+            <div key={_category.categoryId} className="flex items-center gap-2">
+              <Avatar className="bg-secondary">
+                <AvatarImage
+                  src={_category.iconDataURL}
+                  asChild
+                  className="p-2"
+                >
                   <Image
-                    src={_category.imgSrc}
-                    height={289}
-                    width={289}
-                    alt={_category.category}
+                    src={_category.iconDataURL}
+                    height={24}
+                    width={24}
+                    alt={_category.categoryName}
                   />
                 </AvatarImage>
                 <AvatarFallback>
-                  {_category.category.substring(0, 2).toUpperCase()}
+                  {_category.categoryName.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
-              <span>{_category.category}</span>
+              <span>{_category.categoryName}</span>
             </div>
           );
         })}
+        <Button variant="link" className="h-6 p-0">
+          See More...
+        </Button>
       </div>
     </div>
   );

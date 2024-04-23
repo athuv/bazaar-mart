@@ -15,7 +15,7 @@ import PopularCategories from "@/app/_components/molecules/mobile/PopularCategor
 import SlideDrawerSettings from "@/app/_components/molecules/mobile/SlideDrawerSettings";
 import { X } from "lucide-react";
 
-function SlideDrawerWithToggle({ categoryList }: Category) {
+function SlideDrawerWithToggle() {
   return (
     <div>
       <Sheet>
@@ -41,7 +41,7 @@ function SlideDrawerWithToggle({ categoryList }: Category) {
             </Button>
           </div>
 
-          <PopularCategories categoryList={categoryList} />
+          <PopularCategories />
           <SlideDrawerSettings />
         </SheetContent>
       </Sheet>
