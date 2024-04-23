@@ -1,7 +1,4 @@
 import Image from "next/image";
-
-import { FeaturedImage } from "@/lib/types/types";
-
 import {
   Carousel,
   CarouselContent,
@@ -9,8 +6,12 @@ import {
 } from "@/app/_components/atoms/shadcn/carousel";
 
 import CategoryListCard from "@/app/_components/molecules/desktop/CategoryListCard";
+import { getSliderImagesQuery } from "@/lib/db/drizzle/queries";
+import { ResponsiveImage } from "@/lib/types/types";
 
-function FeaturedCarousel({ slider }: FeaturedImage) {
+async function FeaturedCarousel() {
+  const carouselImages: ResponsiveImage[] = await getSliderImagesQuery();
+
   return (
     <div className="gap-2 lg:flex lg:h-fit lg:justify-center lg:px-2 lg:py-4">
       <CategoryListCard />
@@ -21,7 +22,7 @@ function FeaturedCarousel({ slider }: FeaturedImage) {
           className="lg:fit mb-2 h-fit w-full lg:mb-0"
         >
           <CarouselContent>
-            {slider.map((_image) => (
+            {carouselImages.map((_image) => (
               <CarouselItem className="lg:flex-grow" key={_image.sliderImageId}>
                 <picture>
                   <source

@@ -8,26 +8,11 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import { Category } from "@/lib/types/categoryTypes";
-
-async function getMainCategories(): Promise<Category[]> {
-  const response = await fetch(
-    `${process.env.BASE_URL}api/v1/categories?type=main&limit=5`,
-    {
-      cache: "no-store",
-    },
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  const data = await response.json();
-  return data.mainCategories;
-}
+import { Category } from "@/lib/types/types";
+import { getMainCategoriesQuery } from "@/lib/db/drizzle/queries";
 
 async function PopularCategories() {
-  const mainCategories: Category[] = await getMainCategories();
+  const mainCategories: Category[] = await getMainCategoriesQuery({ limit: 5 });
 
   return (
     <div className="p-3">
@@ -48,12 +33,12 @@ async function PopularCategories() {
             <div key={_category.categoryId} className="flex items-center gap-2">
               <Avatar className="bg-secondary">
                 <AvatarImage
-                  src={_category.iconDataURL}
+                  src={_category.iconDataURL || undefined}
                   asChild
                   className="p-2"
                 >
                   <Image
-                    src={_category.iconDataURL}
+                    src={_category.iconDataURL || "/"}
                     height={24}
                     width={24}
                     alt={_category.categoryName}
