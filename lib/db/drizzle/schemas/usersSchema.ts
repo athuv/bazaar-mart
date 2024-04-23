@@ -49,7 +49,7 @@ export const buyersRelations = relations(buyersTable, ({ one, many }) => ({
     fields: [buyersTable.buyerId],
     references: [users.id],
   }),
-  shippingAddresses: many(addressTable),
+  addressTable: many(addressTable),
 }));
 
 export const vendorsRelations = relations(vendorsTable, ({ one }) => ({
@@ -57,7 +57,7 @@ export const vendorsRelations = relations(vendorsTable, ({ one }) => ({
     fields: [vendorsTable.userId],
     references: [users.id],
   }),
-  storeAddress: one(addressTable, {
+  addressTable: one(addressTable, {
     fields: [vendorsTable.storeAddressId],
     references: [addressTable.addressId],
   }),
