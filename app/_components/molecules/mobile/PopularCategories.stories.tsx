@@ -1,6 +1,5 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 
-import categories from "@/lib/data/categories.json";
 import PopularCategories from "./PopularCategories";
 
 // const withTailwindClasses = (Story: StoryFn) => (
@@ -22,8 +21,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SideDrawerPopularCategoryList: Story = {
-  args: {
-    categoryList: categories,
-  },
-};
+export const SideDrawerPopularCategoryList: Story = {};
