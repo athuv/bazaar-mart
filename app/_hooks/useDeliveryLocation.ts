@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DeliveryLocation } from "@/lib/types/deliveryLocationTypes";
+import { DeliveryLocation } from "@/lib/types/types";
 import { Country } from "country-list";
 
 function useDeliveryLocation(): DeliveryLocation {

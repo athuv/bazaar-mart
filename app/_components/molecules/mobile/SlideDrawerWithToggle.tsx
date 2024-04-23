@@ -10,7 +10,6 @@ import HamburgerMenuButton from "@/app/_components/atoms/buttons/HamburgerMenuBu
 import { Button } from "@/app/_components/atoms/shadcn/button";
 import MobileLogo from "@/app/_components/atoms/logo/MobileLogo";
 import Link from "next/link";
-import { Category } from "@/lib/types/categoryTypes";
 import PopularCategories from "@/app/_components/molecules/mobile/PopularCategories";
 import SlideDrawerSettings from "@/app/_components/molecules/mobile/SlideDrawerSettings";
 import { X } from "lucide-react";

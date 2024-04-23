@@ -9,13 +9,9 @@ export interface Image {
 
 export interface ResponsiveImage {
   sliderImageId: number;
-  imageAlt: string;
-  imageMobile: string;
-  imageDesktop: string;
-}
-
-export interface FeaturedImage {
-  slider: ResponsiveImage[];
+  imageAlt: string | null;
+  imageMobile: string | null;
+  imageDesktop: string | null;
 }
 
 export interface ScrollImage {
@@ -49,7 +45,7 @@ export interface Category {
   categoryId: number;
   categoryName: string;
   parentId: number | null;
-  iconDataURL: string;
+  iconDataURL: string | null;
 }
 
 export type GetMainCategories = {
