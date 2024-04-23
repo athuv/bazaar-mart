@@ -1,7 +1,7 @@
-import { getSliderImages } from "@/lib/db/drizzle/queries";
+import { getSliderImagesQuery } from "@/lib/db/drizzle/queries";
 
 export async function GET() {
-  const slider = await getSliderImages();
+  const slider = await getSliderImagesQuery();
 
   return Response.json({ slider });
 }

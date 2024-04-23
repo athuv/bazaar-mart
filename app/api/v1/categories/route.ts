@@ -1,4 +1,4 @@
-import { getMainCategories } from "@/lib/db/drizzle/queries";
+import { getMainCategoriesQuery } from "@/lib/db/drizzle/queries";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const limit = Number(limitParam);
     const validLimit = !isNaN(limit) ? limit : 0;
 
-    const mainCategories = await getMainCategories(validLimit);
+    const mainCategories = await getMainCategoriesQuery({ limit: validLimit });
 
     return Response.json({ mainCategories });
   }
