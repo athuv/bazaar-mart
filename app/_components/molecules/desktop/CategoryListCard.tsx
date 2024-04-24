@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/app/_components/atoms/shadcn/dropdown-menu";
 import { Separator } from "@radix-ui/react-separator";
+import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
 import { ChevronRight } from "lucide-react";
 
 interface CategoryButtonProps {
@@ -20,6 +21,17 @@ interface CategoryButtonProps {
   icon: string;
   setSelectedCategory: Dispatch<SetStateAction<number | null>>;
   setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+function CategoryButtonSkeleton() {
+  return (
+    <Button className="h-8 justify-start text-left text-sm" variant="ghost">
+      <div className="flex w-full items-center gap-2">
+        <Skeleton className="h-4 w-4" />
+        <Skeleton className="h-4 w-full text-xs" />
+      </div>
+    </Button>
+  );
 }
 
 function CategoryButton({
@@ -143,7 +155,10 @@ function CategoryListCard() {
       <DropdownMenu open={open}>
         <DropdownMenuTrigger asChild>
           <div className="flex flex-col px-2 py-4 lg:py-2">
-            {mainCategories.length <= 0 && <div>loading...</div>}
+            {mainCategories.length <= 0 &&
+              Array.from({ length: 12 }, (_, i) => (
+                <CategoryButtonSkeleton key={i} />
+              ))}
             {mainCategories.map((_category) => (
               <CategoryButton
                 key={_category.categoryId}
