@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Sheet,
   SheetClose,
@@ -13,6 +12,49 @@ import Link from "next/link";
 import PopularCategories from "@/app/_components/molecules/mobile/PopularCategories";
 import SlideDrawerSettings from "@/app/_components/molecules/mobile/SlideDrawerSettings";
 import { X } from "lucide-react";
+import { Suspense } from "react";
+import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
+
+function PopularCategoriesSkeleton() {
+  return (
+    <div className="p-3">
+      <div>
+        <div className="flex items-center justify-center p-0">
+          <div className="flex w-full items-center justify-between gap-2">
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-6 w-6" />
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2 pt-3">
+        <div className="flex items-center">
+          <Skeleton className="h-10 w-12 rounded-full" />
+          <Skeleton className="ml-2 h-6 w-full" />
+        </div>
+        <div className="flex items-center">
+          <Skeleton className="h-10 w-12 rounded-full" />
+          <Skeleton className="ml-2 h-6 w-full" />
+        </div>
+        <div className="flex items-center">
+          <Skeleton className="h-10 w-12 rounded-full" />
+          <Skeleton className="ml-2 h-6 w-full" />
+        </div>
+        <div className="flex items-center">
+          <Skeleton className="h-10 w-12 rounded-full" />
+          <Skeleton className="ml-2 h-6 w-full" />
+        </div>
+        <div className="flex items-center">
+          <Skeleton className="h-10 w-12 rounded-full" />
+          <Skeleton className="ml-2 h-6 w-full" />
+        </div>
+
+        <div className="flex h-6 items-center justify-center p-0">
+          <Skeleton className="h-full w-20" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function SlideDrawerWithToggle() {
   return (
@@ -39,8 +81,9 @@ function SlideDrawerWithToggle() {
               <Link href="/login-register">Login / Regsiter</Link>
             </Button>
           </div>
-
-          <PopularCategories />
+          <Suspense fallback={<PopularCategoriesSkeleton />}>
+            <PopularCategories />
+          </Suspense>
           <SlideDrawerSettings />
         </SheetContent>
       </Sheet>
