@@ -1,6 +1,7 @@
 import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
 import { users } from "@/lib/db/drizzle/schemas/authSchema";
 import { relations } from "drizzle-orm";
+import { productReviewsTable, productsTable } from "@/lib/db/drizzle/schemas";
 
 export const addressTable = pgTable("address", {
   addressId: serial("address_id").primaryKey(),
@@ -50,9 +51,10 @@ export const buyersRelations = relations(buyersTable, ({ one, many }) => ({
     references: [users.id],
   }),
   addressTable: many(addressTable),
+  productReviewsTable: many(productReviewsTable),
 }));
 
-export const vendorsRelations = relations(vendorsTable, ({ one }) => ({
+export const vendorsRelations = relations(vendorsTable, ({ one, many }) => ({
   users: one(users, {
     fields: [vendorsTable.userId],
     references: [users.id],
@@ -61,4 +63,5 @@ export const vendorsRelations = relations(vendorsTable, ({ one }) => ({
     fields: [vendorsTable.storeAddressId],
     references: [addressTable.addressId],
   }),
+  productsTable: many(productsTable),
 }));

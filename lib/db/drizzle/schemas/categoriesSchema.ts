@@ -1,3 +1,4 @@
+import { productsTable } from "@/lib/db/drizzle/schemas";
 import { relations } from "drizzle-orm";
 import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
 
@@ -26,12 +27,16 @@ export const categoryVariationsTable = pgTable("category_variation", {
 
 // Relations
 
-export const categoriesRelations = relations(categoriesTable, ({ one }) => ({
-  parentCategory: one(categoriesTable, {
-    fields: [categoriesTable.parentId],
-    references: [categoriesTable.categoryId],
+export const categoriesRelations = relations(
+  categoriesTable,
+  ({ one, many }) => ({
+    parentCategory: one(categoriesTable, {
+      fields: [categoriesTable.parentId],
+      references: [categoriesTable.categoryId],
+    }),
+    productsTable: many(productsTable),
   }),
-}));
+);
 
 export const variationsRelations = relations(variationsTable, ({ many }) => ({
   categoryVariationsTable: many(categoryVariationsTable),
