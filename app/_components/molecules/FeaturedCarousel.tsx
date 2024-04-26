@@ -10,8 +10,8 @@ import { ResponsiveImage } from "@/lib/types/types";
 import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
 
 async function FeaturedCarousel() {
-  // const carouselImages: ResponsiveImage[] = await getSliderImagesQuery();
-  const carouselImages: ResponsiveImage[] = [];
+  const carouselImages: ResponsiveImage[] = await getSliderImagesQuery();
+
   return (
     <div className="flex items-center lg:max-h-[402px] lg:w-full lg:rounded-md lg:bg-secondary">
       <Carousel
