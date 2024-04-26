@@ -5,7 +5,7 @@ import {
   CarouselItem,
 } from "@/app/_components/atoms/shadcn/carousel";
 
-import { getSliderImagesQuery } from "@/lib/db/drizzle/queries";
+import { getSliderImagesQuery } from "@/lib/db/drizzle/queryActions";
 import { ResponsiveImage } from "@/lib/types/types";
 import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
 

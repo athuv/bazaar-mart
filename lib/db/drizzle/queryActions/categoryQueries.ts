@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import { db } from "@/lib/db/drizzle";
 import { categoriesTable } from "@/lib/db/drizzle/schemas";

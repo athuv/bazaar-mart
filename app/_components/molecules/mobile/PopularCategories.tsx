@@ -9,7 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { Category } from "@/lib/types/types";
-import { getMainCategoriesQuery } from "@/lib/db/drizzle/queries";
+import { getMainCategoriesQuery } from "@/lib/db/drizzle/queryActions";
 
 async function PopularCategories() {
   const mainCategories: Category[] = await getMainCategoriesQuery({ limit: 5 });
