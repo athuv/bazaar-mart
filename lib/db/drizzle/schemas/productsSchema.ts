@@ -13,8 +13,7 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { relations, sql } from "drizzle-orm";
-import { db } from "@/lib/db/drizzle";
+import { relations } from "drizzle-orm";
 
 export const serviceTypeEnum = pgEnum("service_type", [
   "return policy",
@@ -26,15 +25,27 @@ export const productsTable = pgTable("product", {
   vendorId: integer("vendor_id")
     .references(() => vendorsTable.vendorId)
     .notNull(),
-  categoryId: integer("integer_id")
+  categoryId: integer("category_id")
     .references(() => categoriesTable.categoryId)
     .notNull(),
   title: varchar("title", { length: 185 }).notNull(),
-  amountInCents: integer("amount_in_cents").notNull(),
-  offPercentage: integer("off_percentage").notNull().default(0),
+  originalPriceInCents: integer("original_price_in_cents").notNull(),
   quantity: integer("quantity").notNull(),
   description: text("description"),
   serviceId: integer("service_id").references(() => servicesTable.serviceId),
+});
+
+export const productDiscountsTable = pgTable("product_discount", {
+  productDiscountId: serial("product_discount_id").primaryKey(),
+  productId: integer("product_id")
+    .notNull()
+    .references(() => productsTable.productId)
+    .unique(),
+  offerName: text("offer_name"),
+  discountPercentage: integer("discount_percentage").notNull(),
+  isActive: boolean("is_active"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
 export const productImagesTable = pgTable("product_image", {
@@ -52,7 +63,7 @@ export const servicesTable = pgTable("service", {
   description: text("description"),
   duration: integer("duration"),
   applicableToProduct: boolean("applicable_to_product").notNull(),
-  applicableToOrder: boolean("applicable_to_order ").notNull(),
+  applicableToOrder: boolean("applicable_to_order").notNull(),
 });
 
 export const productFaqsTable = pgTable("product_faq", {
@@ -106,7 +117,21 @@ export const productsRelations = relations(productsTable, ({ one, many }) => ({
   productImagesTable: many(productImagesTable),
   productFaqsTable: many(productFaqsTable),
   productReviewsTable: many(productReviewsTable),
+  productDiscountsTable: one(productDiscountsTable, {
+    fields: [productsTable.productId],
+    references: [productDiscountsTable.productId],
+  }),
 }));
+
+export const productDiscountsRelations = relations(
+  productDiscountsTable,
+  ({ one }) => ({
+    productsTable: one(productsTable, {
+      fields: [productDiscountsTable.productId],
+      references: [productsTable.productId],
+    }),
+  }),
+);
 
 export const productImagesRelations = relations(
   productImagesTable,
