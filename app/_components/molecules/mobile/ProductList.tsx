@@ -19,7 +19,6 @@ async function ProductList() {
   return (
     <div className="grid grid-cols-2 justify-items-center gap-y-4 py-4">
       {products.map((_product) => {
-        console.log(_product);
         return (
           <Button
             className="h-fit whitespace-normal px-0 py-0 "
