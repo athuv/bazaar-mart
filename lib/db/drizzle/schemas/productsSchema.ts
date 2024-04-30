@@ -53,7 +53,8 @@ export const productImagesTable = pgTable("product_image", {
   productId: integer("product_id")
     .references(() => productsTable.productId)
     .notNull(),
-  image_url: text("image_url").notNull(),
+  imageUrl: text("image_url").notNull(),
+  imageAlt: text("image_alt").notNull(),
   isPrimary: boolean("is_primary").notNull(),
 });
 
