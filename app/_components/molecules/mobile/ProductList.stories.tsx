@@ -1,5 +1,4 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react";
-import productList from "@/lib/data/productList.json";
 import ProductList from "./ProductList";
 
 // const withTailwindClasses = (Story: StoryFn) => (
@@ -21,4 +20,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const ProductListComp: Story = { args: { productList } };
+export const ProductListComp: Story = {};
