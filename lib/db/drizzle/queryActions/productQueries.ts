@@ -30,7 +30,7 @@ export async function getBasicProductsQuery(): Promise<BasicProductList[]> {
           "discount_amount",
         ),
       finalPrice:
-        sql<number>`(${productsTable.originalPriceInCents} / 100) - (((${productsTable.originalPriceInCents} / 100) * (${productDiscountsTable.discountPercentage}) / 100))`.as(
+        sql<number>`(${productsTable.originalPriceInCents} / 100) - (((${productsTable.originalPriceInCents} / 100) * (coalesce(${productDiscountsTable.discountPercentage}, 0)) / 100))`.as(
           "final_price",
         ),
       averageReview: sql<number>`

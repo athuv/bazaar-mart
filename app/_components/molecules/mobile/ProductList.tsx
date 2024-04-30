@@ -48,15 +48,18 @@ async function ProductList() {
                       {`.${_product.finalPrice}`}
                     </span>
                   </div>
-                  <div className="flex h-5 items-center gap-1 truncate">
-                    <span className="truncate line-through">
-                      Rs.{_product.priceInAmount}
-                    </span>
+                  {_product.discountAmount && (
+                    <div className="flex h-5 items-center gap-1 truncate">
+                      <span className="truncate line-through">
+                        Rs.{_product.priceInAmount}
+                      </span>
 
-                    <span className="truncate text-xs">
-                      {`-${_product.discountPercentage}%`}
-                    </span>
-                  </div>
+                      <span className="truncate text-xs">
+                        {_product.discountPercentage &&
+                          `-${_product.discountPercentage}%`}
+                      </span>
+                    </div>
+                  )}
                   <div className="flex h-6 items-center justify-start">
                     <div className="flex h-4">
                       <Rating
