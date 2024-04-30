@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "@smastrom/react-rating/style.css";
 import Footer from "@/app/_components/organisms/Footer";
 import HeaderDektop from "@/app/_components/organisms/desktop/HeaderDesktop";
 import HeaderMobile from "@/app/_components/organisms/mobile/HeaderMobile";
