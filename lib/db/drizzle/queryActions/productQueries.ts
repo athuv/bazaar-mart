@@ -7,9 +7,10 @@ import {
   productDiscountsTable,
   productReviewsTable,
 } from "@/lib/db/drizzle/schemas";
+import { BasicProductList } from "@/lib/types/types";
 import { eq, sql } from "drizzle-orm";
 
-export async function getProductsQuery() {
+export async function getBasicProductsQuery(): Promise<BasicProductList[]> {
   const products = await db
     .select({
       productId: productsTable.productId,
@@ -21,9 +22,9 @@ export async function getProductsQuery() {
       totalReviews: sql<number>`count(${productReviewsTable.productId})`.as(
         "total_review",
       ),
-      primaryImageUrl: productImagesTable.imageUrl,
-      primaryImageAlt: productImagesTable.imageAlt,
-      discountPercentage: productDiscountsTable.discountPercentage,
+      primaryImageUrl: sql<string>`${productImagesTable.imageUrl}`,
+      primaryImageAlt: sql<string>`${productImagesTable.imageAlt}`,
+      discountPercentage: sql<number>`${productDiscountsTable.discountPercentage}`,
       discountAmount:
         sql<number>`((${productsTable.originalPriceInCents} / 100) * (${productDiscountsTable.discountPercentage}) / 100)`.as(
           "discount_amount",

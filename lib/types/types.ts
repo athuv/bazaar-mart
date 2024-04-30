@@ -18,18 +18,17 @@ export interface ScrollImage {
   scroll: Image[];
 }
 
-export interface ProductList {
-  id: string;
+export interface BasicProductList {
+  productId: number;
   title: string;
-  amount: number;
-  cents: number;
-  price: number;
+  priceInAmount: number;
+  totalReviews: number;
   discountPercentage: number;
-  image: Image;
-}
-
-export interface Product {
-  productList: ProductList[];
+  discountAmount: number;
+  finalPrice: number;
+  averageReview: number;
+  primaryImageUrl: string;
+  primaryImageAlt: string;
 }
 
 export interface DeliveryLocation {

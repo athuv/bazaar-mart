@@ -8,13 +8,13 @@ import {
   CardHeader,
 } from "@/app/_components/atoms/shadcn/card";
 
-import { Product } from "@/lib/types/types";
-import { getProductsQuery } from "@/lib/db/drizzle/queryActions";
+import { BasicProductList } from "@/lib/types/types";
+import { getBasicProductsQuery } from "@/lib/db/drizzle/queryActions";
 
 import { Rating } from "@smastrom/react-rating";
 
 async function ProductList() {
-  const products = await getProductsQuery();
+  const products: BasicProductList[] = await getBasicProductsQuery();
 
   return (
     <div className="grid grid-cols-2 justify-items-center gap-y-4 py-4">
