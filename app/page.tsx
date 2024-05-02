@@ -1,4 +1,3 @@
-import BackToTopSection from "@/app/_components/organisms/BackToTopSection";
 import CarouselAndCategorylist from "@/app/_components/organisms/CarouselAndCategorylist";
 import LoginSignupSection from "@/app/_components/organisms/mobile/LoginSignupSection";
 import ProductListSection from "@/app/_components/organisms/mobile/ProductListSection";
@@ -11,7 +10,6 @@ export default function Home() {
       <CarouselAndCategorylist />
       <LoginSignupSection />
       <ProductListSection />
-      <BackToTopSection />
     </main>
   );
 }
