@@ -17,11 +17,11 @@ async function ProductList() {
   const products: BasicProductList[] = await getBasicProductsQuery();
 
   return (
-    <div className="grid grid-cols-2 justify-items-center gap-y-4 py-4">
-      {products.map((_product) => {
+    <div className="grid auto-rows-[276px] grid-cols-[repeat(auto-fill,minmax(148px,1fr))] justify-items-center gap-2 gap-y-3 py-4">
+      {[...products, ...products, ...products, ...products].map((_product) => {
         return (
           <Button
-            className="h-fit whitespace-normal px-0 py-0 "
+            className="h-[276px] w-[148px] whitespace-normal px-0 py-0 "
             key={_product.productId}
             variant="ghost"
             asChild
