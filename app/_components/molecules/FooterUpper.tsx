@@ -4,7 +4,7 @@ import React from "react";
 
 function FooterUpper() {
   return (
-    <div className="flex flex-col items-start">
+    <div className="flex flex-col items-start md:flex-row md:items-center md:justify-center md:gap-2">
       <Button variant="link" className="px-0 text-primary-foreground" asChild>
         <Link href="./">Home</Link>
       </Button>
