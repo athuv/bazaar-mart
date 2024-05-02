@@ -4,7 +4,7 @@ import React from "react";
 
 function LoginSignup() {
   return (
-    <div className="flex flex-col items-start gap-2 px-2 py-4">
+    <div className="flex flex-col items-start gap-2 px-2 py-4 md:hidden">
       <h4 className="header-4">Sign in for the best experience</h4>
       <Button className="w-full" variant="secondary" size="lg" asChild>
         <Link href="/login-signup">Sign in</Link>
