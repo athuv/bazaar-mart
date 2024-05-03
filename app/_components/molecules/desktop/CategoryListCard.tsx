@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 
 import useCategories from "@/app/_hooks/useCategories";
@@ -14,6 +14,13 @@ import {
 import { Separator } from "@radix-ui/react-separator";
 import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
 import { ChevronRight } from "lucide-react";
+import { getChildCategoryByParentIdQuery } from "@/lib/db/drizzle/queryActions";
+import { Category } from "@/lib/types/types";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/_components/atoms/shadcn/avatar";
 
 interface CategoryButtonProps {
   categoryName: string;
@@ -48,7 +55,7 @@ function CategoryButton({
         setSelectedCategory(categoryId);
         setOpen(true);
       }}
-      className="h-8 justify-start text-left text-sm"
+      className="group h-8 justify-between text-left text-sm"
       variant="ghost"
     >
       <div className="flex items-center gap-2">
@@ -61,83 +68,126 @@ function CategoryButton({
   );
 }
 
-function CategoryContentPopover({ children }: { children: ReactNode }) {
-  const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
-  return (
-    <div className="flex h-full w-full">
-      <div
-        onMouseEnter={() => {
-          setIsSubOpen(true);
-        }}
-        className="min-w-60"
-      >
-        1
-      </div>
-      {isSubOpen && (
-        <>
-          <Separator orientation="vertical" className="w-px bg-secondary" />
-          <div className="w-96 px-2">2</div>
-        </>
-      )}
-    </div>
-  );
-}
-
 function CategoryContent({
   selectedCategory,
 }: {
   selectedCategory: number | null;
 }) {
-  switch (selectedCategory) {
-    case 1:
-      return (
-        <CategoryContentPopover>{selectedCategory}</CategoryContentPopover>
-      );
-      break;
+  const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
+  const [childCategories, setChildCategories] = useState<Category[]>();
+  const [subChildCategories, setSubChildCategories] = useState<Category[]>();
 
-    case 2:
-      return (
-        <div className="flex">
-          <div className="w-60">1</div>
-          <div className="w-full">
-            <Separator dir="" />2
-          </div>
-        </div>
-      );
+  useEffect(() => {
+    async function fetchChildCategoryByParentId(parentId: number) {
+      const childCategoriesResults = await getChildCategoryByParentIdQuery({
+        parentId,
+      });
 
-    case 3:
-      return <div>3</div>;
+      setChildCategories(childCategoriesResults);
+    }
 
-    case 4:
-      return <div>4</div>;
+    fetchChildCategoryByParentId(selectedCategory!);
+  }, [selectedCategory]);
 
-    case 5:
-      return <div>5</div>;
+  async function handleSubCategoryHover(parentId: number) {
+    const subChildCategoryResult = await getChildCategoryByParentIdQuery({
+      parentId,
+    });
 
-    case 6:
-      return <div>6</div>;
-
-    case 7:
-      return <div>7</div>;
-
-    case 8:
-      return <div>8</div>;
-
-    case 9:
-      return <div>9</div>;
-
-    case 10:
-      return <div>10</div>;
-
-    case 11:
-      return <div>11</div>;
-
-    case 12:
-      return <div>12</div>;
-
-    default:
-      break;
+    setSubChildCategories(subChildCategoryResult);
   }
+
+  return (
+    <div
+      className="flex h-full w-full"
+      onMouseLeave={() => setIsSubOpen(false)}
+    >
+      <div className="min-w-48 pr-2">
+        {(childCategories!?.length <= 0 || !childCategories) && (
+          <div className="flex flex-col">
+            {Array.from({ length: 6 }, (_, i) => (
+              <Button
+                key={i}
+                className="h-8 justify-start text-left text-sm"
+                variant="ghost"
+              >
+                <Skeleton className="h-5 w-48 text-xs" />
+              </Button>
+            ))}
+          </div>
+        )}
+        {childCategories?.map((_childCategory) => (
+          <div key={_childCategory.categoryId} className="flex pt-1">
+            <Button
+              className="group h-8 w-full justify-between text-left text-sm"
+              variant="ghost"
+              onMouseEnter={() => {
+                setIsSubOpen(true);
+                handleSubCategoryHover(_childCategory.categoryId);
+              }}
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs">{_childCategory.categoryName}</span>
+              </div>
+              <ChevronRight
+                size={14}
+                className="invisible group-hover:visible"
+              />
+            </Button>
+          </div>
+        ))}
+      </div>
+      {/* NOTE: change below true to isSubOpen */}
+      {isSubOpen && subChildCategories!?.length > 0 && (
+        <>
+          <Separator orientation="vertical" className="w-px bg-secondary" />
+          <div className="grid auto-rows-max grid-cols-4 justify-items-center gap-2 px-2">
+            {subChildCategories!?.map((_subChildCategory) => (
+              <Button
+                key={_subChildCategory.categoryId}
+                variant="ghost"
+                className="h-fit whitespace-normal px-1"
+                asChild
+              >
+                <div className="flex h-24 w-32 flex-col items-center truncate p-1">
+                  <Avatar className="h-12 w-12">
+                    <AvatarImage
+                      src={
+                        _subChildCategory.iconDataURL
+                          ? `images/categories/${_subChildCategory.iconDataURL}`
+                          : undefined
+                      }
+                      asChild
+                      alt="@shadcn"
+                    >
+                      <Image
+                        alt={_subChildCategory.categoryName}
+                        src={
+                          _subChildCategory.iconDataURL
+                            ? `/images/categories/${_subChildCategory.iconDataURL}`
+                            : "/images/categories/default.webp"
+                        }
+                        width={48}
+                        height={48}
+                      />
+                    </AvatarImage>
+                    <AvatarFallback>
+                      {_subChildCategory.categoryName
+                        .substring(0, 2)
+                        .toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="line-clamp-2 h-full w-full text-center text-xs">
+                    {_subChildCategory.categoryName}
+                  </div>
+                </div>
+              </Button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
 function CategoryListCard() {
@@ -147,7 +197,7 @@ function CategoryListCard() {
 
   return (
     <div
-      onMouseLeave={() => setOpen(false)}
+      onMouseLeave={() => setOpen(false)} // NOTE: Change to false;
       className="hidden rounded-md border lg:flex lg:min-h-[402px] lg:w-72 lg:flex-col"
     >
       {/* <h4 className="p-2 font-semibold">Categories</h4> */}
