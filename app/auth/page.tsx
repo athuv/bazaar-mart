@@ -1,11 +1,9 @@
-import LoginRegister from "@/app/_components/molecules/LoginRegister";
+import AuthSection from "@/app/_components/organisms/AuthSection";
 
 function AuthPage() {
   return (
-    <main>
-      <section className="w-full">
-        <LoginRegister />
-      </section>
+    <main className="flex w-full flex-grow flex-col lg:mx-auto lg:max-w-6xl xl:max-w-7xl">
+      <AuthSection />
     </main>
   );
 }
