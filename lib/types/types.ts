@@ -45,6 +45,7 @@ export interface Category {
   categoryName: string;
   parentId: number | null;
   iconDataURL: string | null;
+  children?: Category[];
 }
 
 export type GetMainCategories = {
@@ -53,4 +54,5 @@ export type GetMainCategories = {
 
 export interface CategoriesHook {
   mainCategories: Category[];
+  categoriesTree: Category[];
 }
