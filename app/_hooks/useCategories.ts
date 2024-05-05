@@ -1,6 +1,6 @@
 import {
   getAllCategories,
-  getMainCategoriesQuery,
+  getMainCategories,
 } from "@/lib/db/drizzle/queryActions";
 import { CategoriesHook, Category } from "@/lib/types/types";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ function useCategories({ limit = 0 }): CategoriesHook {
 
   useEffect(() => {
     const fetchMainCategories = async () => {
-      const mainCategories: Category[] = await getMainCategoriesQuery({
+      const mainCategories: Category[] = await getMainCategories({
         limit,
       });
 

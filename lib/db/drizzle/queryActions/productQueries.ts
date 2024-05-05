@@ -10,7 +10,7 @@ import {
 import { BasicProductList } from "@/lib/types/types";
 import { eq, sql } from "drizzle-orm";
 
-export async function getBasicProductsQuery(): Promise<BasicProductList[]> {
+export async function getBasicProducts(): Promise<BasicProductList[]> {
   const products = await db
     .select({
       productId: productsTable.productId,

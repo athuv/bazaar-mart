@@ -5,7 +5,7 @@ import { categoriesTable } from "@/lib/db/drizzle/schemas";
 import { eq, isNull } from "drizzle-orm";
 import { Category, GetMainCategories } from "@/lib/types/types";
 
-export async function getMainCategoriesQuery({
+export async function getMainCategories({
   limit,
 }: GetMainCategories): Promise<Category[]> {
   const mainCategories = await db.query.categoriesTable.findMany({
@@ -41,7 +41,7 @@ export async function getAllCategories() {
   return categoryTree.sort((a, b) => a.categoryId - b.categoryId);
 }
 
-export async function getChildCategoryByParentIdQuery({
+export async function getChildCategoryByParentId({
   parentId,
 }: {
   parentId: number;

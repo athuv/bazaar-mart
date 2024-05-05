@@ -9,12 +9,12 @@ import {
 } from "@/app/_components/atoms/shadcn/card";
 
 import { BasicProductList } from "@/lib/types/types";
-import { getBasicProductsQuery } from "@/lib/db/drizzle/queryActions";
+import { getBasicProducts } from "@/lib/db/drizzle/queryActions";
 
 import { Rating } from "@smastrom/react-rating";
 
 async function ProductList() {
-  const products: BasicProductList[] = await getBasicProductsQuery();
+  const products: BasicProductList[] = await getBasicProducts();
 
   return (
     <div>

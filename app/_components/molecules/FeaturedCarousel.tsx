@@ -5,12 +5,12 @@ import {
   CarouselItem,
 } from "@/app/_components/atoms/shadcn/carousel";
 
-import { getSliderImagesQuery } from "@/lib/db/drizzle/queryActions";
+import { getSliderImages } from "@/lib/db/drizzle/queryActions";
 import { ResponsiveImage } from "@/lib/types/types";
 import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
 
 async function FeaturedCarousel() {
-  const carouselImages: ResponsiveImage[] = await getSliderImagesQuery();
+  const carouselImages: ResponsiveImage[] = await getSliderImages();
 
   return (
     <div className="flex items-center lg:max-h-[402px] lg:w-full lg:rounded-md lg:bg-secondary">
