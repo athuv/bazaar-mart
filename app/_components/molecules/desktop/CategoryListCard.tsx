@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 
 import useCategories from "@/app/_hooks/useCategories";
@@ -14,7 +14,6 @@ import {
 import { Separator } from "@radix-ui/react-separator";
 import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
 import { ChevronRight } from "lucide-react";
-import { getChildCategoryByParentIdQuery } from "@/lib/db/drizzle/queryActions";
 import { Category } from "@/lib/types/types";
 import {
   Avatar,
@@ -24,9 +23,9 @@ import {
 
 interface CategoryButtonProps {
   categoryName: string;
-  categoryId: number;
+  childrenCategories: Category[] | undefined;
   icon: string;
-  setSelectedCategory: Dispatch<SetStateAction<number | null>>;
+  setSelectedCategory: Dispatch<SetStateAction<Category[] | undefined>>;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -43,16 +42,16 @@ function CategoryButtonSkeleton() {
 
 function CategoryButton({
   categoryName,
-  categoryId,
+  childrenCategories,
   icon,
   setSelectedCategory,
   setOpen,
 }: CategoryButtonProps) {
   return (
     <Button
-      onPointerDown={() => setSelectedCategory(categoryId)}
+      onPointerDown={() => setSelectedCategory(childrenCategories!)}
       onMouseEnter={() => {
-        setSelectedCategory(categoryId);
+        setSelectedCategory(childrenCategories!);
         setOpen(true);
       }}
       className="group h-8 justify-between text-left text-sm"
@@ -71,31 +70,12 @@ function CategoryButton({
 function CategoryContent({
   selectedCategory,
 }: {
-  selectedCategory: number | null;
+  selectedCategory: Category[] | undefined;
 }) {
   const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
-  const [childCategories, setChildCategories] = useState<Category[]>();
-  const [subChildCategories, setSubChildCategories] = useState<Category[]>();
-
-  useEffect(() => {
-    async function fetchChildCategoryByParentId(parentId: number) {
-      const childCategoriesResults = await getChildCategoryByParentIdQuery({
-        parentId,
-      });
-
-      setChildCategories(childCategoriesResults);
-    }
-
-    fetchChildCategoryByParentId(selectedCategory!);
-  }, [selectedCategory]);
-
-  async function handleSubCategoryHover(parentId: number) {
-    const subChildCategoryResult = await getChildCategoryByParentIdQuery({
-      parentId,
-    });
-
-    setSubChildCategories(subChildCategoryResult);
-  }
+  const [subChildCategories, setSubChildCategories] = useState<
+    Category[] | undefined
+  >([]);
 
   return (
     <div
@@ -103,7 +83,7 @@ function CategoryContent({
       onMouseLeave={() => setIsSubOpen(false)}
     >
       <div className="min-w-48 pr-2">
-        {(childCategories!?.length <= 0 || !childCategories) && (
+        {(selectedCategory!?.length <= 0 || !selectedCategory) && (
           <div className="flex flex-col">
             {Array.from({ length: 6 }, (_, i) => (
               <Button
@@ -116,14 +96,14 @@ function CategoryContent({
             ))}
           </div>
         )}
-        {childCategories?.map((_childCategory) => (
+        {selectedCategory?.map((_childCategory) => (
           <div key={_childCategory.categoryId} className="flex pt-1">
             <Button
               className="group h-8 w-full justify-between text-left text-sm"
               variant="ghost"
               onMouseEnter={() => {
                 setIsSubOpen(true);
-                handleSubCategoryHover(_childCategory.categoryId);
+                setSubChildCategories(_childCategory.children);
               }}
             >
               <div className="flex items-center gap-2">
@@ -192,8 +172,10 @@ function CategoryContent({
 
 function CategoryListCard() {
   const [open, setOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const { mainCategories } = useCategories({ limit: 0 });
+  const [selectedCategory, setSelectedCategory] = useState<
+    Category[] | undefined
+  >([]);
+  const { categoriesTree } = useCategories({});
 
   return (
     <div
@@ -205,17 +187,17 @@ function CategoryListCard() {
       <DropdownMenu open={open}>
         <DropdownMenuTrigger asChild>
           <div className="flex flex-col px-2 py-4 lg:py-2">
-            {mainCategories.length <= 0 &&
+            {categoriesTree.length <= 0 &&
               Array.from({ length: 12 }, (_, i) => (
                 <CategoryButtonSkeleton key={i} />
               ))}
-            {mainCategories.map((_category) => (
+            {categoriesTree.map((_category) => (
               <CategoryButton
                 key={_category.categoryId}
                 categoryName={_category.categoryName}
-                categoryId={_category.categoryId}
+                childrenCategories={_category.children!}
                 icon={_category.iconDataURL || "/"}
-                setSelectedCategory={setSelectedCategory}
+                setSelectedCategory={setSelectedCategory!}
                 setOpen={setOpen}
               />
             ))}
