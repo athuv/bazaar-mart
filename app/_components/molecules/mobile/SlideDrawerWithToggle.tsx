@@ -78,7 +78,9 @@ function SlideDrawerWithToggle() {
           </SheetHeader>
           <div className="flex items-center justify-center bg-primary p-3">
             <Button className="w-full" variant="secondary" asChild>
-              <Link href="/login-register">Login / Regsiter</Link>
+              <SheetClose asChild>
+                <Link href="/auth">Login / Regsiter</Link>
+              </SheetClose>
             </Button>
           </div>
           <Suspense fallback={<PopularCategoriesSkeleton />}>
