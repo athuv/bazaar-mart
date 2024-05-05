@@ -17,6 +17,30 @@ export async function getMainCategoriesQuery({
   return mainCategories;
 }
 
+export async function getAllCategories() {
+  const mainCategories: Category[] = await db.query.categoriesTable.findMany();
+
+  function buildCategoryTree(
+    categories: Category[],
+    parentId: number | null,
+  ): Category[] {
+    const children = categories.filter(
+      (category) => category.parentId === parentId,
+    );
+
+    return children.map((category) => ({
+      categoryId: category.categoryId,
+      categoryName: category.categoryName,
+      iconDataURL: category.iconDataURL,
+      parentId: category.parentId,
+      children: buildCategoryTree(categories, category.categoryId), // Recursive call for children
+    }));
+  }
+
+  const categoryTree = buildCategoryTree(mainCategories, null);
+  return categoryTree.sort((a, b) => a.categoryId - b.categoryId);
+}
+
 export async function getChildCategoryByParentIdQuery({
   parentId,
 }: {
