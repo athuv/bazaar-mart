@@ -7,7 +7,7 @@ import SearchSection from "@/app/_components/organisms/mobile/SearchSection";
 export default async function Home() {
   return (
     <>
-      <main className="flex min-h-screen w-full flex-grow flex-col lg:mx-auto lg:max-w-6xl xl:max-w-7xl">
+      <main className="flex w-full flex-grow flex-col lg:mx-auto lg:max-w-6xl xl:max-w-7xl">
         <SearchSection />
         <CarouselAndCategorylist />
         <LoginSignupSection />
