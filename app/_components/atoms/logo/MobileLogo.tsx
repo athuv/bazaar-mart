@@ -1,9 +1,16 @@
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 
 function MobileLogo() {
   return (
-    <Image alt="" src="/images/logo/mobile-logo.svg" width={157} height={17} />
+    <Link href="/">
+      <Image
+        alt=""
+        src="/images/logo/mobile-logo.svg"
+        width={157}
+        height={17}
+      />
+    </Link>
   );
 }
 
