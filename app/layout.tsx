@@ -26,9 +26,7 @@ export default function RootLayout({
           <HeaderMobile />
           <HeaderDektop />
         </header>
-
         {children}
-        <BackToTopSection />
         <Footer />
       </body>
     </html>
