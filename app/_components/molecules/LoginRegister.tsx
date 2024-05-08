@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Button } from "@/app/_components/atoms/shadcn/button";
 import {
   Card,
@@ -7,8 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/app/_components/atoms/shadcn/card";
-import { Input } from "@/app/_components/atoms/shadcn/input";
-import { Label } from "@/app/_components/atoms/shadcn/label";
 import {
   Tabs,
   TabsContent,
@@ -16,57 +16,55 @@ import {
   TabsTrigger,
 } from "@/app/_components/atoms/shadcn/tabs";
 
+import LoginForm from "@/app/_components/molecules/LoginForm";
+
 function LoginRegister() {
   return (
-    <div className="px-2 py-2">
-      <Tabs defaultValue="account" className="w-full">
+    <div className="flex w-[32rem] items-center justify-center px-2 py-2">
+      <Tabs defaultValue="login" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="password">Password</TabsTrigger>
+          <TabsTrigger value="login">Login</TabsTrigger>
+          <TabsTrigger value="signup">Signup</TabsTrigger>
         </TabsList>
-        <TabsContent value="account">
+        <TabsContent value="login">
           <Card>
             <CardHeader>
-              <CardTitle>Account</CardTitle>
+              <CardTitle>Login</CardTitle>
               <CardDescription>
-                Make changes to your account here. Click save when youre done.
+                Welcome to Bazaar Mart, Please login.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" defaultValue="Pedro Duarte" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="username">Username</Label>
-                <Input id="username" defaultValue="@peduarte" />
+              <div>
+                <LoginForm />
               </div>
             </CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
+            <CardFooter className="flex flex-row items-start justify-center gap-1">
+              <span className="text-xs">New member?</span>
+              <TabsList
+                className="h-fit bg-transparent p-0 text-xs text-card-foreground ring-offset-0 transition-none"
+                asChild
+              >
+                <TabsTrigger value="signup" asChild>
+                  <span>Register Here</span>
+                </TabsTrigger>
+              </TabsList>
             </CardFooter>
           </Card>
         </TabsContent>
-        <TabsContent value="password">
+        <TabsContent value="signup">
           <Card>
             <CardHeader>
-              <CardTitle>Password</CardTitle>
+              <CardTitle>Signup</CardTitle>
               <CardDescription>
-                Change your password here. After saving, youll be logged out.
+                Create your Bazaar Mart Account Here
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="current">Current password</Label>
-                <Input id="current" type="password" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="new">New password</Label>
-                <Input id="new" type="password" />
-              </div>
+              <div>adfsa</div>
             </CardContent>
             <CardFooter>
-              <Button>Save password</Button>
+              <Button>Sign Up</Button>
             </CardFooter>
           </Card>
         </TabsContent>
