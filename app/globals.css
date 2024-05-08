@@ -33,6 +33,9 @@
     --ring: 217.2 32.6% 17.5%;
 
     --radius: 0.5rem;
+
+    /* Custom Added Variables */
+    --success: 120, 100%, 30%;
   }
   .dark {
     --background: 217.2 50% 5%;
