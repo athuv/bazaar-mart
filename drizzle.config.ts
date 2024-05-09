@@ -6,9 +6,9 @@ loadEnvConfig("./");
 export default defineConfig({
   schema: "./lib/db/drizzle/schemas/*",
   out: "./lib/db/drizzle/migrations",
-  driver: "pg",
+  dialect: "postgresql",
   dbCredentials: {
-    connectionString: process.env.POSTGRES_URL as string,
+    url: process.env.POSTGRES_URL as string,
   },
   verbose: true,
   strict: true,
