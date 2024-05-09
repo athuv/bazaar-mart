@@ -70,6 +70,16 @@ export const usersRelations = relations(users, ({ many }) => ({
   verificationTokens: many(verificationTokens),
 }));
 
+export const verificationTokensRelations = relations(
+  verificationTokens,
+  ({ one }) => ({
+    users: one(users, {
+      fields: [verificationTokens.identifier],
+      references: [users.id],
+    }),
+  }),
+);
+
 export const accountsRelations = relations(accounts, ({ one }) => ({
   users: one(users, {
     fields: [accounts.userId],

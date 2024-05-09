@@ -38,8 +38,11 @@ export const categoriesRelations = relations(
   }),
 );
 
-export const variationsRelations = relations(variationsTable, ({ many }) => ({
-  categoryVariationsTable: many(categoryVariationsTable),
+export const variationsRelations = relations(variationsTable, ({ one }) => ({
+  categoryVariationsTable: one(categoryVariationsTable, {
+    fields: [variationsTable.variationId],
+    references: [categoryVariationsTable.variationId],
+  }),
 }));
 
 export const categoryVariationsRelations = relations(
