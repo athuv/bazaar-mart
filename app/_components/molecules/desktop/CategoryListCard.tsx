@@ -58,8 +58,12 @@ function CategoryButton({
       variant="ghost"
     >
       <div className="flex items-center gap-2">
-        {/* <Icon className="h-4 w-4" /> */}
-        <Image src={icon} alt={categoryName} height={16} width={16} />
+        <Avatar className="h-4 w-4">
+          <AvatarImage src={icon} alt={categoryName} />
+          <AvatarFallback>
+            {categoryName.substring(0, 2).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
         <span className="text-xs">{categoryName}</span>
       </div>
       <ChevronRight size={14} className="invisible group-hover:visible" />
@@ -137,20 +141,8 @@ function CategoryContent({
                           ? `images/categories/${_subChildCategory.iconDataURL}`
                           : undefined
                       }
-                      asChild
                       alt="@shadcn"
-                    >
-                      <Image
-                        alt={_subChildCategory.categoryName}
-                        src={
-                          _subChildCategory.iconDataURL
-                            ? `/images/categories/${_subChildCategory.iconDataURL}`
-                            : "/images/categories/default.webp"
-                        }
-                        width={48}
-                        height={48}
-                      />
-                    </AvatarImage>
+                    />
                     <AvatarFallback>
                       {_subChildCategory.categoryName
                         .substring(0, 2)
