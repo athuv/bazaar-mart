@@ -3,6 +3,7 @@
 import FormInputWithLabel from "@/app/_components/atoms/input/FormInputWithLabel";
 import { Button } from "@/app/_components/atoms/shadcn/button";
 import { Form } from "@/app/_components/atoms/shadcn/form";
+import loginTest from "@/lib/actions/loginAction";
 
 import { LoginSchema, loginSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,11 +12,16 @@ import { useForm } from "react-hook-form";
 function LoginForm() {
   const form = useForm<LoginSchema>({
     mode: "onTouched",
+    defaultValues: {
+      usernameEmail: "",
+      password: "",
+    },
     resolver: zodResolver(loginSchema),
   });
 
   const onFormSubmit = async (data: LoginSchema) => {
-    console.log(data);
+    const result = await loginTest(data);
+    console.log(result);
   };
 
   return (

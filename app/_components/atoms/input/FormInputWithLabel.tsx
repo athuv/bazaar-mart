@@ -51,6 +51,7 @@ interface FormInputWithLabelProps {
     | "week";
   isRequired: boolean;
   validation: GetInputValidationProps;
+  defaultValue?: string;
 }
 
 function FormInputWithLabel({
@@ -61,6 +62,7 @@ function FormInputWithLabel({
   type,
   isRequired = true,
   validation,
+  defaultValue,
 }: FormInputWithLabelProps) {
   return (
     <FormField
@@ -72,6 +74,7 @@ function FormInputWithLabel({
             <FormLabel className="text-card-foreground">{label}</FormLabel>
             <FormControl>
               <Input
+                {...field}
                 className={cn(
                   "focus-visible:border-none focus-visible:ring-1 focus-visible:ring-offset-0",
                   validation.error &&
@@ -83,7 +86,6 @@ function FormInputWithLabel({
                 placeholder={placeholder}
                 type={type}
                 required={isRequired}
-                {...field}
               />
             </FormControl>
           </div>
