@@ -70,7 +70,7 @@ function HeaderRightContent() {
       </Popover>
 
       <Button asChild>
-        <Link href="./">
+        <Link href="./auth">
           <User size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
           <div className="flex flex-col">
             <span className="text-xs">
