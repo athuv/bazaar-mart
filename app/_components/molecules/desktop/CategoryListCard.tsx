@@ -1,9 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
-import Image from "next/image";
-
-import useCategories from "@/app/_hooks/useCategories";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { Button } from "@/app/_components/atoms/shadcn/button";
 import {
@@ -20,6 +17,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/app/_components/atoms/shadcn/avatar";
+import { useCategoriesStore } from "@/lib/stores/useCategoriesStore";
 
 interface CategoryButtonProps {
   categoryName: string;
@@ -167,7 +165,16 @@ function CategoryListCard() {
   const [selectedCategory, setSelectedCategory] = useState<
     Category[] | undefined
   >([]);
-  const { categoriesTree } = useCategories({});
+
+  const fetchCategoriesTree = useCategoriesStore(
+    (state) => state.fetchCategoryTree,
+  );
+  const categoriesTree = useCategoriesStore((state) => state.categoriesTree);
+
+  useEffect(() => {
+    fetchCategoriesTree();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div

@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { getNames, getCode } from "country-list";
 import useDeliveryLocation from "@/app/_hooks/useDeliveryLocation";
-import useCategories from "@/app/_hooks/useCategories";
 import { DELIVERY_LOCATION_AND_SEARCHBAR } from "@/lib/configs/desktopUiConfig";
 
 import { Button } from "@/app/_components/atoms/shadcn/button";
@@ -27,18 +26,29 @@ import {
 import { ScrollArea } from "@/app/_components/atoms/shadcn/scroll-area";
 
 import { CheckIcon, ChevronDown, Ellipsis, MapPin, Search } from "lucide-react";
+import { useCategoriesStore } from "@/lib/stores/useCategoriesStore";
+
+const {
+  DELIVERY_SELECTION_BUTTON_TEXT,
+  DELIVERY_SELECTION_BUTTON_ICON_SIZE,
+  SEARCHBAR_BUTTON_TEXT,
+} = DELIVERY_LOCATION_AND_SEARCHBAR;
 
 function DeliveryLocationAndSearchBar() {
   const [openLocation, setOpenLocation] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { country, setCountry } = useDeliveryLocation();
-  const { mainCategories } = useCategories({ limit: 0 });
-  const {
-    DELIVERY_SELECTION_BUTTON_TEXT,
-    DELIVERY_SELECTION_BUTTON_ICON_SIZE,
-    SEARCHBAR_BUTTON_TEXT,
-  } = DELIVERY_LOCATION_AND_SEARCHBAR;
+
+  const fetchMainCategories = useCategoriesStore(
+    (state) => state.fetchMainCategories,
+  );
+  const mainCategories = useCategoriesStore((state) => state.mainCategories);
+
+  useEffect(() => {
+    fetchMainCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-grow">
