@@ -38,7 +38,6 @@ function LoginForm() {
               error: form.formState.errors.usernameEmail,
               touchedField: form.formState.touchedFields.usernameEmail,
             }}
-            serverValidation={ServerValidationError.usernameEmail}
           />
           <FormInputWithLabel
             name="password"
@@ -51,7 +50,6 @@ function LoginForm() {
               error: form.formState.errors.password,
               touchedField: form.formState.touchedFields.password,
             }}
-            serverValidation={ServerValidationError.password}
           />
           <Button className="mt-2" type="submit">
             Login
