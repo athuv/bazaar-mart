@@ -51,6 +51,7 @@ interface FormInputWithLabelProps {
     | "week";
   isRequired: boolean;
   validation: GetInputValidationProps;
+  serverValidation: string | undefined;
   defaultValue?: string;
 }
 
@@ -62,6 +63,7 @@ function FormInputWithLabel({
   type,
   isRequired = true,
   validation,
+  serverValidation,
   defaultValue,
 }: FormInputWithLabelProps) {
   return (
@@ -90,6 +92,9 @@ function FormInputWithLabel({
             </FormControl>
           </div>
           <FormMessage className="pl-1 pt-1 text-xs" />
+          <p className="pl-1 pt-1 text-xs font-medium text-destructive">
+            {serverValidation}
+          </p>
         </FormItem>
       )}
     />
