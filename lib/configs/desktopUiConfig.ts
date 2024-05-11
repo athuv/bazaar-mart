@@ -19,15 +19,13 @@ export const DESKTOP_NAV_RIGHT: DesktopNavRight = {
   },
   AUTH_LINK: {
     SMALL_TEXT: "Welcome",
-    TEXT: "Sign in / Register",
+    TEXT: "Login / Register",
   },
   CART_LINK: {
     TEXT: "Cart",
   },
 };
 
-export const DELIVERY_LOCATION_AND_SEARCHBAR = {
-  DELIVERY_SELECTION_BUTTON_TEXT: "Deliver to",
-  DELIVERY_SELECTION_BUTTON_ICON_SIZE: 20,
+export const SEARCHBAR = {
   SEARCHBAR_BUTTON_TEXT: "All",
 };
