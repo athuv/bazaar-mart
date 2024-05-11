@@ -56,3 +56,8 @@ export interface CategoriesHook {
   mainCategories: Category[];
   categoriesTree: Category[];
 }
+
+export type LoginReturn = {
+  usernameEmail?: string;
+  password?: string;
+};
