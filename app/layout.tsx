@@ -5,7 +5,6 @@ import "@smastrom/react-rating/style.css";
 import Footer from "@/app/_components/organisms/Footer";
 import HeaderDektop from "@/app/_components/organisms/desktop/HeaderDesktop";
 import HeaderMobile from "@/app/_components/organisms/mobile/HeaderMobile";
-import BackToTopSection from "@/app/_components/organisms/BackToTopSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +22,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} flex min-h-screen flex-col`}>
         <header>
-          <HeaderMobile />
           <HeaderDektop />
+          <HeaderMobile />
         </header>
         {children}
         <Footer />
