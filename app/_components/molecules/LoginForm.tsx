@@ -7,7 +7,6 @@ import { login } from "@/lib/actions/authAction";
 
 import { LoginSchema, loginSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFormState } from "react-dom";
 
 import { useForm } from "react-hook-form";
 
@@ -21,12 +20,17 @@ function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
 
-  const [ServerValidationError, formAction] = useFormState(login, {});
+  const handleFormSubmit = async (data: LoginSchema) => {
+    const result = await login(data);
+  };
 
   return (
     <div>
       <Form {...form}>
-        <form className="flex flex-col" action={formAction}>
+        <form
+          onSubmit={form.handleSubmit(handleFormSubmit)}
+          className="flex flex-col"
+        >
           <FormInputWithLabel
             name="usernameEmail"
             form={form}

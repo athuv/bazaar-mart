@@ -1,14 +1,11 @@
 "use server";
 
 import { LoginReturn } from "@/lib/types/types";
-import { loginSchema } from "@/lib/zod";
+import { LoginSchema, loginSchema } from "@/lib/zod";
 
-export async function login(
-  prevState: any,
-  formData: FormData,
-): Promise<LoginReturn> {
-  const usernameEmail = formData.get("usernameEmail");
-  const password = formData.get("password");
+export async function login(formData: LoginSchema): Promise<LoginReturn> {
+  const usernameEmail = formData.usernameEmail;
+  const password = formData.password;
 
   const result = loginSchema.safeParse({ usernameEmail, password });
 
