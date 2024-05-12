@@ -14,7 +14,7 @@ function LoginForm() {
   const form = useForm<LoginSchema>({
     mode: "onTouched",
     defaultValues: {
-      usernameEmail: "",
+      email: "",
       password: "",
     },
     resolver: zodResolver(loginSchema),
@@ -32,15 +32,15 @@ function LoginForm() {
           className="flex flex-col"
         >
           <FormInputWithLabel
-            name="usernameEmail"
+            name="email"
             form={form}
-            label="Username or email"
-            placeholder="Username or email"
-            type="text"
+            label="Email"
+            placeholder="Email"
+            type="email"
             isRequired={false}
             validation={{
-              error: form.formState.errors.usernameEmail,
-              touchedField: form.formState.touchedFields.usernameEmail,
+              error: form.formState.errors.email,
+              touchedField: form.formState.touchedFields.email,
             }}
           />
           <FormInputWithLabel

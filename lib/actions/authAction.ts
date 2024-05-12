@@ -4,10 +4,10 @@ import { LoginReturn } from "@/lib/types/types";
 import { LoginSchema, loginSchema } from "@/lib/zod";
 
 export async function login(formData: LoginSchema): Promise<LoginReturn> {
-  const usernameEmail = formData.usernameEmail;
+  const email = formData.email;
   const password = formData.password;
 
-  const result = loginSchema.safeParse({ usernameEmail, password });
+  const result = loginSchema.safeParse({ email, password });
 
   let zodErrors: LoginReturn = {};
 
