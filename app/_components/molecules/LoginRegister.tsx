@@ -39,14 +39,21 @@ function LoginRegister() {
                 <LoginForm />
               </div>
             </CardContent>
-            <CardFooter className="flex flex-row items-start justify-center gap-1">
-              <span className="text-xs">New member?</span>
+            <CardFooter className="flex flex-col items-center justify-center">
+              <Link className="text-xs hover:underline" href="./">
+                Reset your password
+              </Link>
               <TabsList
                 className="h-fit bg-transparent p-0 text-xs text-card-foreground ring-offset-0 transition-none"
                 asChild
               >
                 <TabsTrigger value="signup" asChild>
-                  <span>Register Here</span>
+                  <div className="flex gap-1">
+                    <span className="text-xs">New member?</span>
+                    <span className="cursor-pointer hover:underline">
+                      Register Here
+                    </span>
+                  </div>
                 </TabsTrigger>
               </TabsList>
             </CardFooter>
