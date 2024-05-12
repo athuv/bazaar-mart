@@ -13,6 +13,7 @@ export const users = pgTable("user", {
   id: serial("id").notNull().primaryKey(),
   name: text("name"),
   email: text("email").notNull(),
+  password: text("password"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
   contactNumber: text("contactNumber"),
