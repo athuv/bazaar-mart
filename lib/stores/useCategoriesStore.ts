@@ -34,7 +34,6 @@ export const useCategoriesStore = create<State & Actions>()(
     }),
     {
       name: "categories-store",
-      skipHydration: true,
     },
   ),
 );
