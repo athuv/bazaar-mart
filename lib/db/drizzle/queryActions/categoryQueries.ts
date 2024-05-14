@@ -22,7 +22,7 @@ export async function getAllCategories() {
 
   function buildCategoryTree(
     categories: Category[],
-    parentId: number | null,
+    parentId: string | null,
   ): Category[] {
     const children = categories.filter(
       (category) => category.parentId === parentId,
@@ -38,13 +38,21 @@ export async function getAllCategories() {
   }
 
   const categoryTree = buildCategoryTree(mainCategories, null);
-  return categoryTree.sort((a, b) => a.categoryId - b.categoryId);
+  return categoryTree.sort(function (a, b) {
+    if (a.categoryName < b.categoryName) {
+      return -1;
+    }
+    if (a.categoryName > b.categoryName) {
+      return 1;
+    }
+    return 0;
+  });
 }
 
 export async function getChildCategoryByParentId({
   parentId,
 }: {
-  parentId: number;
+  parentId: string;
 }): Promise<Category[]> {
   const childCategories = await db.query.categoriesTable.findMany({
     where: eq(categoriesTable.parentId, parentId),

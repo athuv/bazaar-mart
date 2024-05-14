@@ -8,7 +8,7 @@ export interface Image {
 }
 
 export interface ResponsiveImage {
-  sliderImageId: number;
+  sliderImageId: string;
   imageAlt: string | null;
   imageMobile: string | null;
   imageDesktop: string | null;
@@ -19,7 +19,7 @@ export interface ScrollImage {
 }
 
 export interface BasicProductList {
-  productId: number;
+  productId: string;
   title: string;
   priceInAmount: number;
   totalReviews: number;
@@ -32,9 +32,9 @@ export interface BasicProductList {
 }
 
 export interface Category {
-  categoryId: number;
+  categoryId: string;
   categoryName: string;
-  parentId: number | null;
+  parentId: string | null;
   iconDataURL: string | null;
   children?: Category[];
 }
