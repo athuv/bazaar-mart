@@ -1,6 +1,3 @@
-import { Country } from "country-list";
-import { Dispatch, SetStateAction } from "react";
-
 export interface Image {
   id: string;
   alt: string;
