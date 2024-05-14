@@ -2,16 +2,17 @@ import { users } from "@/lib/db/drizzle/schemas/authSchema";
 import { relations } from "drizzle-orm";
 import {
   boolean,
-  integer,
   pgTable,
-  serial,
+  text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
 
 export const sliderImagesTable = pgTable("slider_image", {
-  sliderImageId: serial("slider_image_id").primaryKey(),
-  userId: integer("user_id")
+  sliderImageId: text("slider_image_id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id")
     .references(() => users.id)
     .notNull(),
   imageMobile: varchar("image_mobile", { length: 10 }),

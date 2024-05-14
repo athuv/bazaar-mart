@@ -1,26 +1,32 @@
 import { productsTable } from "@/lib/db/drizzle/schemas";
 import { relations } from "drizzle-orm";
-import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar } from "drizzle-orm/pg-core";
 
 export const categoriesTable = pgTable("category", {
-  categoryId: serial("category_id").primaryKey(),
+  categoryId: text("category_id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   categoryName: varchar("category_name", { length: 50 }).notNull(),
-  parentId: integer("parent_id"),
+  parentId: text("parent_id"),
   iconDataURL: text("icon_data_url"),
 });
 
 export const variationsTable = pgTable("variation", {
-  variationId: serial("variation_id").primaryKey(),
+  variationId: text("variation_id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   attributeType: varchar("attribute_type", { length: 15 }).notNull(),
   attributeValue: varchar("attribute_value", { length: 25 }).notNull(),
 });
 
 export const categoryVariationsTable = pgTable("category_variation", {
-  categoryVariationId: serial("category_variation_id").primaryKey(),
-  categoryId: integer("category_id")
+  categoryVariationId: text("category_variation_id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  categoryId: text("category_id")
     .references(() => categoriesTable.categoryId)
     .notNull(),
-  variationId: integer("variation_id")
+  variationId: text("variation_id")
     .references(() => variationsTable.variationId)
     .notNull(),
 });

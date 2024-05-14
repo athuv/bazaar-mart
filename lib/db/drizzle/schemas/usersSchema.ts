@@ -1,10 +1,12 @@
-import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar } from "drizzle-orm/pg-core";
 import { users } from "@/lib/db/drizzle/schemas/authSchema";
 import { relations } from "drizzle-orm";
 import { productReviewsTable, productsTable } from "@/lib/db/drizzle/schemas";
 
 export const addressTable = pgTable("address", {
-  addressId: serial("address_id").primaryKey(),
+  addressId: text("address_id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   addressLineOne: varchar("address_line_1", { length: 255 }).notNull(),
   addressLineTwo: varchar("address_line_2", { length: 255 }),
   city: varchar("city", { length: 25 }).notNull(),
@@ -12,19 +14,23 @@ export const addressTable = pgTable("address", {
 });
 
 export const buyersTable = pgTable("buyer", {
-  buyerId: serial("buyer_id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
-  shippingAddressId: integer("shipping_address_id").references(
+  buyerId: text("buyer_id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id").references(() => users.id),
+  shippingAddressId: text("shipping_address_id").references(
     () => addressTable.addressId,
     { onDelete: "cascade" },
   ),
 });
 
 export const vendorsTable = pgTable("vendor", {
-  vendorId: serial("vendor_id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
+  vendorId: text("vendor_id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id").references(() => users.id),
   storeName: varchar("store_name", { length: 50 }),
-  storeAddressId: integer("store_address_id").references(
+  storeAddressId: text("store_address_id").references(
     () => addressTable.addressId,
     { onDelete: "cascade" },
   ),
@@ -47,7 +53,7 @@ export const addressRelations = relations(addressTable, ({ one }) => ({
 
 export const buyersRelations = relations(buyersTable, ({ one, many }) => ({
   users: one(users, {
-    fields: [buyersTable.buyerId],
+    fields: [buyersTable.userId],
     references: [users.id],
   }),
   addressTable: many(addressTable),

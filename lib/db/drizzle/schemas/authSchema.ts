@@ -4,28 +4,29 @@ import {
   text,
   primaryKey,
   integer,
-  serial,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "next-auth/adapters";
 import { relations } from "drizzle-orm";
 
 export const users = pgTable("user", {
-  id: serial("id").notNull().primaryKey(),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   name: text("name"),
   email: text("email").notNull(),
   password: text("password"),
+  contactNumner: integer("contact_number"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-  contactNumber: text("contactNumber"),
 });
 
 export const accounts = pgTable(
   "account",
   {
-    userId: integer("userId")
+    userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    type: text("type").$type<AdapterAccount["type"]>().notNull(),
+    type: text("type").$type<AdapterAccount>().notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),
     refresh_token: text("refresh_token"),
@@ -44,8 +45,8 @@ export const accounts = pgTable(
 );
 
 export const sessions = pgTable("session", {
-  sessionToken: text("sessionToken").notNull().primaryKey(),
-  userId: integer("userId")
+  sessionToken: text("sessionToken").primaryKey(),
+  userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
