@@ -3,7 +3,6 @@
 import FormInputWithLabel from "@/app/_components/atoms/input/FormInputWithLabel";
 import { Button } from "@/app/_components/atoms/shadcn/button";
 import { Form } from "@/app/_components/atoms/shadcn/form";
-import { login } from "@/lib/actions/authAction";
 
 import { LoginSchema, loginSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,7 +20,7 @@ function LoginForm() {
   });
 
   const handleFormSubmit = async (data: LoginSchema) => {
-    const result = await login(data);
+    //const result = await login(data);
   };
 
   return (
