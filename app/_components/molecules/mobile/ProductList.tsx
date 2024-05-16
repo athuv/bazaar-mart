@@ -29,7 +29,7 @@ async function ProductList() {
             <Link href="./">
               <Card className="w-[148px] rounded-md border-none">
                 <Image
-                  src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/products/${_product.productId}/${_product.primaryImageUrl}`}
+                  src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/products/${_product.productId}/148_${_product.primaryImageUrl}`}
                   alt={_product.primaryImageAlt!}
                   width={148}
                   height={148}
