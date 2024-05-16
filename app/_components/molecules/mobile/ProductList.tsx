@@ -29,11 +29,11 @@ async function ProductList() {
             <Link href="./">
               <Card className="w-[148px] rounded-md border-none">
                 <Image
-                  src={`/images/products/${_product.productId}/${_product.primaryImageUrl}`}
+                  src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/products/${_product.productId}/${_product.primaryImageUrl}`}
                   alt={_product.primaryImageAlt!}
-                  width={300}
-                  height={300}
-                  className="rounded-t-md"
+                  width={148}
+                  height={148}
+                  className="h-[148px] w-[148px] rounded-t-md object-contain"
                 />
 
                 <CardHeader className="space-y-0 p-0 px-2 py-1">
