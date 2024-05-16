@@ -24,14 +24,14 @@ async function FeaturedCarousel() {
               <Skeleton className="">
                 <Image
                   alt="image"
-                  src="/images/slider-images/default-min-768px.webp"
+                  src="https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/slider-images/default-min-768px.webp"
                   width={768}
                   height={504}
                   className="object-contain md:hidden"
                 />
                 <Image
                   alt="image"
-                  src="/images/slider-images/default-max-768px.webp"
+                  src="https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/slider-images/default-max-768px.webp"
                   width={1023}
                   height={375}
                   className="hidden object-contain md:inline lg:rounded-sm"
@@ -43,14 +43,14 @@ async function FeaturedCarousel() {
             <CarouselItem className="lg:flex-grow" key={_image.sliderImageId}>
               <Image
                 alt={_image.imageAlt!}
-                src={`/images/slider-images/${_image.imageMobile}`}
+                src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/slider-images/${_image.imageMobile}`}
                 width={768}
                 height={503}
                 className="object-contain md:hidden"
               />
               <Image
                 alt={_image.imageAlt!}
-                src={`/images/slider-images/${_image.imageDesktop}`}
+                src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/slider-images/${_image.imageDesktop}`}
                 width={1023}
                 height={375}
                 className="hidden object-contain md:inline lg:rounded-sm"
