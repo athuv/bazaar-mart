@@ -57,7 +57,7 @@ function CategoryButton({
     >
       <div className="flex items-center gap-2">
         <Avatar className="h-4 w-4">
-          <AvatarImage src={icon} alt={categoryName} />
+          <AvatarImage width={16} height={16} src={icon} alt={categoryName} />
           <AvatarFallback>
             {categoryName.substring(0, 2).toUpperCase()}
           </AvatarFallback>
