@@ -17,6 +17,7 @@ import {
 } from "@/app/_components/atoms/shadcn/tabs";
 
 import LoginForm from "@/app/_components/molecules/LoginForm";
+import SignupForm from "@/app/_components/molecules/SignupForm";
 
 function LoginRegister() {
   return (
@@ -68,11 +69,10 @@ function LoginRegister() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div>adfsa</div>
+              <div>
+                <SignupForm />
+              </div>
             </CardContent>
-            <CardFooter>
-              <Button>Sign Up</Button>
-            </CardFooter>
           </Card>
         </TabsContent>
       </Tabs>
