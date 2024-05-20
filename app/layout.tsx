@@ -5,6 +5,7 @@ import "@smastrom/react-rating/style.css";
 import Footer from "@/app/_components/organisms/Footer";
 import HeaderDektop from "@/app/_components/organisms/desktop/HeaderDesktop";
 import HeaderMobile from "@/app/_components/organisms/mobile/HeaderMobile";
+import AlertbarSection from "@/app/_components/organisms/AlertbarSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <HeaderDektop />
           <HeaderMobile />
         </header>
+        <AlertbarSection />
         {children}
         <Footer />
       </body>
