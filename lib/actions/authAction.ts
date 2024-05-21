@@ -1,23 +1,21 @@
 "use server";
 
-import { createSbClient } from "@/lib/db/supabase";
+import { createBackEndClient } from "@/lib/db/supabase";
 import { SignupSchema, signupSchema } from "@/lib/zod";
 
-
 type err = {
-  type?: "field-error" | 'server-error' | 'email-sent-success';
+  type?: "field-error" | "server-error" | "email-sent-success";
   field?: "email" | "password" | "root" | undefined;
   message?: string | undefined;
-}
+};
 
-export async function signup(formData: SignupSchema):Promise<err[] | err > {
-
-  const supabase = await createSbClient();
+export async function signup(formData: SignupSchema): Promise<err[] | err> {
+  const supabase = await createBackEndClient();
   const validationResults = signupSchema.safeParse(formData);
 
   if (!validationResults.success) {
-    const zodErrors:err[] = validationResults.error.issues.map((issue) => ({
-      type: 'field-error',
+    const zodErrors: err[] = validationResults.error.issues.map((issue) => ({
+      type: "field-error",
       field: issue.path[0] as "email" | "password",
       message: issue.message,
     }));
@@ -30,15 +28,47 @@ export async function signup(formData: SignupSchema):Promise<err[] | err > {
     password: formData.password,
   });
 
-  if(error) {
+  if (error) {
     return {
-      type: 'server-error',
-      message: `Something went wrong, Please contact us.`
-    }
+      type: "server-error",
+      message: `Something went wrong, Please contact us.`,
+    };
   }
 
   return {
-    type: 'email-sent-success',
-    message: `A verification email has been sent to ${data.user?.email}.`
+    type: "email-sent-success",
+    message: `A verification email has been sent to ${data.user?.email}.`,
+  };
+}
+
+export async function login(formData: SignupSchema): Promise<err[] | err> {
+  const validationResults = signupSchema.safeParse(formData);
+
+  if (!validationResults.success) {
+    const zodErrors: err[] = validationResults.error.issues.map((issue) => ({
+      type: "field-error",
+      field: issue.path[0] as "email" | "password",
+      message: issue.message,
+    }));
+
+    return zodErrors;
   }
+
+  const supabase = await createBackEndClient();
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: formData.email,
+    password: formData.password,
+  });
+
+  if (error) {
+    return {
+      type: "server-error",
+      message: error.message,
+    };
+  }
+
+  console.log(data);
+
+  return {};
 }

@@ -1,1 +1,2 @@
-export * from "./createSbClient";
+export * from "./server";
+export * from "./client";
