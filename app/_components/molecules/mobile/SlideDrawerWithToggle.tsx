@@ -14,6 +14,8 @@ import SlideDrawerSettings from "@/app/_components/molecules/mobile/SlideDrawerS
 import { X } from "lucide-react";
 import { Suspense } from "react";
 import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
+import { createBackEndClient } from "@/lib/db/supabase";
+import LogoutButton from "@/app/_components/atoms/buttons/LogoutButton";
 
 function PopularCategoriesSkeleton() {
   return (
@@ -56,7 +58,10 @@ function PopularCategoriesSkeleton() {
   );
 }
 
-function SlideDrawerWithToggle() {
+async function SlideDrawerWithToggle() {
+  const supabase = await createBackEndClient();
+  const { data } = await supabase.auth.getUser();
+
   return (
     <div>
       <Sheet>
@@ -77,11 +82,15 @@ function SlideDrawerWithToggle() {
             </SheetClose>
           </SheetHeader>
           <div className="flex items-center justify-center bg-primary p-3">
-            <Button className="w-full" variant="secondary" asChild>
-              <SheetClose asChild>
-                <Link href="/auth">Login / Regsiter</Link>
-              </SheetClose>
-            </Button>
+            {data.user ? (
+              <LogoutButton />
+            ) : (
+              <Button className="w-full" variant="secondary" asChild>
+                <SheetClose asChild>
+                  <Link href="/auth">Login / Regsiter</Link>
+                </SheetClose>
+              </Button>
+            )}
           </div>
           <Suspense fallback={<PopularCategoriesSkeleton />}>
             <PopularCategories />
