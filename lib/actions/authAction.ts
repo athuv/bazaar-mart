@@ -2,6 +2,7 @@
 
 import { createBackEndClient } from "@/lib/db/supabase";
 import { SignupSchema, signupSchema } from "@/lib/zod";
+import { redirect } from "next/navigation";
 
 type err = {
   type?: "field-error" | "server-error" | "email-sent-success";
@@ -62,13 +63,21 @@ export async function login(formData: SignupSchema): Promise<err[] | err> {
   });
 
   if (error) {
+    console.log(error);
     return {
       type: "server-error",
       message: error.message,
     };
   }
 
-  console.log(data);
+  redirect("/");
+}
 
-  return {};
+export async function logout() {
+  const supabase = await createBackEndClient();
+  const { error } = await supabase.auth.signOut({ scope: "local" });
+
+  if (!error) {
+    redirect("/auth");
+  }
 }
