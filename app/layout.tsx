@@ -6,6 +6,7 @@ import Footer from "@/app/_components/organisms/Footer";
 import HeaderDektop from "@/app/_components/organisms/desktop/HeaderDesktop";
 import HeaderMobile from "@/app/_components/organisms/mobile/HeaderMobile";
 import AlertbarSection from "@/app/_components/organisms/AlertbarSection";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
         <AlertbarSection />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
