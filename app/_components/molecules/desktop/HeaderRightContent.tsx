@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { DESKTOP_NAV_RIGHT } from "@/lib/configs/desktopUiConfig";
@@ -18,11 +18,27 @@ import {
 import { Label } from "@/app/_components/atoms/shadcn/label";
 import { Badge } from "@/app/_components/atoms/shadcn/badge";
 
-import { ChevronDown, Languages, ShoppingCart, User } from "lucide-react";
+import {
+  ChevronDown,
+  Languages,
+  LogOut,
+  ShoppingCart,
+  User,
+} from "lucide-react";
+import { useAuthStore } from "@/lib/stores/useAuthStore";
+import { useRouter } from "next/navigation";
 
 function HeaderRightContent() {
   const [openLangugae, setOpenLanguage] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const router = useRouter();
+  const user = useAuthStore((state) => state.user);
+  const signOut = useAuthStore((state) => state.signOut);
+
+  const handleLogout = async () => {
+    const isLoggedOut = await signOut();
+    isLoggedOut && router.push("/auth");
+  };
 
   return (
     <div className="flex">
@@ -68,18 +84,32 @@ function HeaderRightContent() {
           </RadioGroup>
         </PopoverContent>
       </Popover>
-
-      <Button asChild>
-        <Link href="./auth">
-          <User size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
-          <div className="flex flex-col">
+      {/* Auth Button */}
+      {user ? (
+        <Button onClick={() => handleLogout()}>
+          <LogOut size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
+          <div className="flex flex-col gap-1">
             <span className="text-xs">
-              {DESKTOP_NAV_RIGHT.AUTH_LINK.SMALL_TEXT}
+              {DESKTOP_NAV_RIGHT.AUTH_LINK_LOGOUT.SMALL_TEXT}
             </span>
-            <span>{DESKTOP_NAV_RIGHT.AUTH_LINK.TEXT}</span>
+            <span>{DESKTOP_NAV_RIGHT.AUTH_LINK_LOGOUT.TEXT}</span>
           </div>
-        </Link>
-      </Button>
+        </Button>
+      ) : (
+        <Button asChild>
+          <Link href="./auth">
+            <User size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
+            <div className="flex flex-col">
+              <span className="text-xs">
+                {DESKTOP_NAV_RIGHT.AUTH_LINK.SMALL_TEXT}
+              </span>
+              <span>{DESKTOP_NAV_RIGHT.AUTH_LINK.TEXT}</span>
+            </div>
+          </Link>
+        </Button>
+      )}
+
+      {/* Shopping cart button */}
       <Button className="flex gap-1" asChild>
         <Link href="./">
           <ShoppingCart size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
