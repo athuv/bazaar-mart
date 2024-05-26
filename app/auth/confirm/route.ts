@@ -2,7 +2,7 @@
 import { type EmailOtpType } from "@supabase/supabase-js";
 import { type NextRequest, NextResponse } from "next/server";
 
-import { createBackEndClient } from "@/lib/db/supabase";
+import { getBackEndClient } from "@/lib/actions/actionHelper";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   redirectTo.searchParams.delete("type");
 
   if (token_hash && type) {
-    const supabase = await createBackEndClient();
+    const supabase = await getBackEndClient();
 
     const { error } = await supabase.auth.verifyOtp({
       type,
