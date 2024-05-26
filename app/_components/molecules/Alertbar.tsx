@@ -8,13 +8,13 @@ function Alertbar() {
   return (
     <>
       {!isOnline && (
-        <div className="flex h-6 w-full items-center justify-center bg-destructive">
+        <div className="flex h-fit w-full items-center justify-center bg-destructive text-center">
           Your offline, Please check your internet connection
         </div>
       )}
 
       {showOnline && (
-        <div className="flex h-6 w-full items-center justify-center bg-success">
+        <div className="flex h-fit w-full items-center justify-center bg-success text-center">
           Thanks! Your Online.Now...
         </div>
       )}
