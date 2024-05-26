@@ -1,6 +1,6 @@
 "use server";
 
-import { createBackEndClient } from "@/lib/db/supabase";
+import { getBackEndClient } from "@/lib/actions/actionHelper";
 import { SignupSchema, signupSchema } from "@/lib/zod";
 import { redirect } from "next/navigation";
 
@@ -11,7 +11,7 @@ type err = {
 };
 
 export async function signup(formData: SignupSchema): Promise<err[] | err> {
-  const supabase = await createBackEndClient();
+  const supabase = await getBackEndClient();
   const validationResults = signupSchema.safeParse(formData);
 
   if (!validationResults.success) {
@@ -55,7 +55,7 @@ export async function login(formData: SignupSchema): Promise<err[] | err> {
     return zodErrors;
   }
 
-  const supabase = await createBackEndClient();
+  const supabase = await getBackEndClient();
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email: formData.email,
@@ -74,7 +74,7 @@ export async function login(formData: SignupSchema): Promise<err[] | err> {
 }
 
 export async function logout() {
-  const supabase = await createBackEndClient();
+  const supabase = await getBackEndClient();
   const { error } = await supabase.auth.signOut({ scope: "local" });
 
   if (!error) {
