@@ -7,6 +7,10 @@ type DesktopNavRight = {
     SMALL_TEXT: string;
     TEXT: string;
   };
+  AUTH_LINK_LOGOUT: {
+    SMALL_TEXT: string;
+    TEXT: string;
+  };
   CART_LINK: {
     TEXT: string;
   };
@@ -20,6 +24,10 @@ export const DESKTOP_NAV_RIGHT: DesktopNavRight = {
   AUTH_LINK: {
     SMALL_TEXT: "Welcome",
     TEXT: "Login / Register",
+  },
+  AUTH_LINK_LOGOUT: {
+    SMALL_TEXT: " ",
+    TEXT: "Logout",
   },
   CART_LINK: {
     TEXT: "Cart",
