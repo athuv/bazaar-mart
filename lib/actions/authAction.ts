@@ -81,3 +81,15 @@ export async function logout() {
     redirect("/auth");
   }
 }
+
+export async function getUser() {
+  const supabase = await getBackEndClient();
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error) {
+    console.error("Error fetching user:", error);
+    return null;
+  }
+
+  return data.user || null;
+}
