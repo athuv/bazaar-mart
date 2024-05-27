@@ -14,8 +14,8 @@ import SlideDrawerSettings from "@/app/_components/molecules/mobile/SlideDrawerS
 import { X } from "lucide-react";
 import { Suspense } from "react";
 import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
-import LogoutButton from "@/app/_components/atoms/buttons/LogoutButton";
 import { getUser } from "@/lib/actions/authAction";
+import LogoutMobileButton from "@/app/_components/atoms/buttons/LogoutMobileButton";
 
 function PopularCategoriesSkeleton() {
   return (
@@ -82,7 +82,7 @@ async function SlideDrawerWithToggle() {
           </SheetHeader>
           <div className="flex items-center justify-center bg-primary p-3">
             {user ? (
-              <LogoutButton />
+              <LogoutMobileButton />
             ) : (
               <Button className="w-full" variant="secondary" asChild>
                 <SheetClose asChild>
