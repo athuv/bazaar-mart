@@ -1,8 +1,8 @@
-import React from "react";
-
 import DesktopSearchBar from "@/app/_components/molecules/desktop/DesktopSearchBar";
 import MobileLogo from "@/app/_components/atoms/logo/MobileLogo";
-import HeaderRightContent from "@/app/_components/molecules/desktop/HeaderRightContent";
+import LanguageSelectionPopover from "@/app/_components/molecules/desktop/LanguageSelectionPopover";
+import CartButton from "@/app/_components/molecules/desktop/CartButton";
+import AuthButton from "@/app/_components/molecules/desktop/AuthButton";
 
 function HeaderDektop() {
   return (
@@ -12,7 +12,11 @@ function HeaderDektop() {
           <MobileLogo />
         </div>
         <DesktopSearchBar />
-        <HeaderRightContent />
+        <div className="flex">
+          <LanguageSelectionPopover />
+          <AuthButton />
+          <CartButton />
+        </div>
       </div>
     </div>
   );
