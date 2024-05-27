@@ -28,9 +28,9 @@ function AuthSubscriber() {
       authListener?.subscription.unsubscribe();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user, supabase]);
 
-  return null;
+  return <></>;
 }
 
 export default AuthSubscriber;
