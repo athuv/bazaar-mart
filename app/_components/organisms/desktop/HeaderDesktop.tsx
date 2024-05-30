@@ -6,7 +6,7 @@ import AuthButton from "@/app/_components/molecules/desktop/AuthButton";
 
 function HeaderDektop() {
   return (
-    <div className="hidden h-14 w-screen bg-primary text-primary-foreground lg:block">
+    <div className="hidden h-14 w-full bg-primary text-primary-foreground lg:block">
       <div className="flex h-14 items-center justify-between lg:mx-auto lg:max-w-6xl lg:px-2 xl:max-w-7xl">
         <div className="flex min-w-52">
           <MobileLogo />
