@@ -26,7 +26,7 @@ async function ProductList() {
             variant="ghost"
             asChild
           >
-            <Link href="./">
+            <Link href={`/product/${_product.productId}`}>
               <Card className="w-[148px] rounded-md border-none">
                 <Image
                   src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/products/${_product.productId}/148_${_product.primaryImageUrl}`}
