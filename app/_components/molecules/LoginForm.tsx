@@ -9,9 +9,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
-import { login } from "@/lib/actions/authAction";
+import { login, resendConfirmationEmail } from "@/lib/actions/authAction";
 import { useState } from "react";
 import { RotateCw } from "lucide-react";
+import Link from "next/link";
 
 function LoginForm() {
   const [serverMessage, setServerMessage] = useState<{
@@ -31,7 +32,7 @@ function LoginForm() {
   const handleFormSubmit = async (data: LoginSchema) => {
     setServerMessage({ type: null, message: null });
     const result = await login(data);
-    console.log(result);
+
     if (Array.isArray(result)) {
       result?.forEach((err) => {
         if ((err.type = "field-error")) {
@@ -43,6 +44,14 @@ function LoginForm() {
     } else {
       result?.type === "server-error" &&
         setServerMessage({ type: "error", message: result.message! });
+    }
+  };
+
+  const handleConfirmationEmailResend = async () => {
+    const result = await resendConfirmationEmail(form.getValues("email"));
+
+    if (result?.type === "success") {
+      setServerMessage({ type: "success", message: result.message! });
     }
   };
 
@@ -78,11 +87,27 @@ function LoginForm() {
         />
         <FormMessage
           className={cn(
-            "pl-1 pt-1 text-xs",
-            serverMessage.type === "error" && "text-destructive",
+            "pl-1 pt-1 text-sm",
+            serverMessage.type === "error"
+              ? "text-destructive"
+              : "text-success",
           )}
         >
-          {serverMessage.message}
+          {serverMessage.message === "Email not confirmed" ? (
+            <Button variant="link" asChild>
+              <>
+                Email not verified,{" "}
+                <span
+                  onClick={async () => await handleConfirmationEmailResend()}
+                  className="text-success hover:cursor-pointer hover:underline"
+                >
+                  Resend Confirmation Link
+                </span>
+              </>
+            </Button>
+          ) : (
+            serverMessage.message
+          )}
         </FormMessage>
         <Button
           disabled={form.formState.isSubmitting}
