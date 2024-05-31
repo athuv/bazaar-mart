@@ -2,6 +2,7 @@
 
 import { getBackEndClient } from "@/lib/actions/actionHelper";
 import { SignupSchema, signupSchema } from "@/lib/zod";
+import { emailSchema } from "@/lib/zod/emailSchema";
 import { redirect } from "next/navigation";
 
 type err = {
@@ -63,7 +64,6 @@ export async function login(formData: SignupSchema): Promise<err[] | err> {
   });
 
   if (error) {
-    console.log(error);
     return {
       type: "server-error",
       message: error.message,
@@ -92,4 +92,24 @@ export async function getUser() {
   }
 
   return data.user || null;
+}
+
+export async function resendConfirmationEmail(email: string) {
+  const validationResults = emailSchema.safeParse({ email });
+
+  if (validationResults.success) {
+    const supabase = await getBackEndClient();
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: email,
+    });
+    console.log(error);
+    if (error === null) {
+      return {
+        type: "success",
+        message: `Confirmation Link Sent to ${email}`,
+      };
+    }
+  }
+  console.log("no email");
 }
