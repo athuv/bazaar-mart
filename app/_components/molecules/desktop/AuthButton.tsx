@@ -12,7 +12,7 @@ async function AuthButton() {
     <LogoutDesktopButton />
   ) : (
     <Button asChild>
-      <Link href="./auth">
+      <Link href="/auth">
         <User size={DESKTOP_NAV_RIGHT.ICON_SIZE} />
         <div className="flex flex-col">
           <span className="text-xs">
