@@ -94,9 +94,9 @@ function SignupForm() {
             type="submit"
           >
             {form.formState.isSubmitting ? (
-              <div className="flex gap-1">
+              <div className="flex items-center justify-center gap-1">
                 <span>Registering...</span>
-                <RotateCw className=" animate-spin" />
+                <RotateCw className=" animate-spin" size={16} />
               </div>
             ) : (
               "Signup"
