@@ -18,6 +18,7 @@ import {
   AvatarImage,
 } from "@/app/_components/atoms/shadcn/avatar";
 import { useCategoriesStore } from "@/lib/stores/useCategoriesStore";
+import Link from "next/link";
 
 interface CategoryButtonProps {
   categoryName: string;
@@ -58,8 +59,8 @@ function CategoryButton({
       <div className="flex items-center gap-2">
         <Avatar className="h-4 w-4">
           <AvatarImage width={16} height={16} src={icon} alt={categoryName} />
-          <AvatarFallback>
-            {categoryName.substring(0, 2).toUpperCase()}
+          <AvatarFallback className="text-xs">
+            {categoryName.substring(0, 1).toUpperCase()}
           </AvatarFallback>
         </Avatar>
         <span className="text-xs">{categoryName}</span>
@@ -108,9 +109,18 @@ function CategoryContent({
                 setSubChildCategories(_childCategory.children);
               }}
             >
-              <div className="flex items-center gap-2">
-                <span className="text-xs">{_childCategory.categoryName}</span>
-              </div>
+              <Button
+                variant="link"
+                className="flex items-center gap-2"
+                asChild
+              >
+                <Link
+                  href={`/${_childCategory.categoryName}`}
+                  className="text-xs"
+                >
+                  {_childCategory.categoryName}
+                </Link>
+              </Button>
               <ChevronRight
                 size={14}
                 className="invisible group-hover:visible"
@@ -131,7 +141,10 @@ function CategoryContent({
                 className="h-fit whitespace-normal px-1"
                 asChild
               >
-                <div className="flex h-24 w-32 flex-col items-center truncate p-1">
+                <Link
+                  href={`/${_subChildCategory.categoryName}`}
+                  className="flex h-24 w-32 flex-col items-center truncate p-1"
+                >
                   <Avatar className="h-12 w-12">
                     <AvatarImage
                       src={
@@ -139,7 +152,7 @@ function CategoryContent({
                           ? `images/categories/${_subChildCategory.iconDataURL}`
                           : undefined
                       }
-                      alt="@shadcn"
+                      alt={_subChildCategory.categoryName}
                     />
                     <AvatarFallback>
                       {_subChildCategory.categoryName
@@ -150,7 +163,7 @@ function CategoryContent({
                   <div className="line-clamp-2 h-full w-full text-center text-xs">
                     {_subChildCategory.categoryName}
                   </div>
-                </div>
+                </Link>
               </Button>
             ))}
           </div>
