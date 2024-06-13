@@ -103,7 +103,7 @@ export async function resendConfirmationEmail(email: string) {
       type: "signup",
       email: email,
     });
-    console.log(error);
+
     if (error === null) {
       return {
         type: "success",
@@ -111,5 +111,4 @@ export async function resendConfirmationEmail(email: string) {
       };
     }
   }
-  console.log("no email");
 }
