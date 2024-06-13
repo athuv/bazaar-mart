@@ -1,11 +1,11 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { AnyPgColumn, text, uuid } from "drizzle-orm/pg-core";
 import { productVariationTable, publicSchema } from "@/lib/db/drizzle/schemas";
 
 export const categoryTable = publicSchema.table("category", {
   categoryId: uuid("category_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   categoryName: text("category_name").notNull(),
   parentId: uuid("parent_id").references(
     (): AnyPgColumn => categoryTable.categoryId,
@@ -16,7 +16,7 @@ export const categoryTable = publicSchema.table("category", {
 export const variationValueTable = publicSchema.table("variation_value", {
   variationValueId: uuid("variation_value_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   attributeValue: uuid("attribute_value").notNull(),
 });
 
@@ -25,7 +25,7 @@ export const variationTypeValueTable = publicSchema.table(
   {
     variationTypeValueId: uuid("variation_type_value_id")
       .primaryKey()
-      .$defaultFn(() => crypto.randomUUID()),
+      .default(sql`uuid_generate_v4()`),
     variationTypeId: uuid("variation_type_id")
       .references(() => variationTypeTable.variationTypeId)
       .notNull(),
@@ -38,14 +38,14 @@ export const variationTypeValueTable = publicSchema.table(
 export const variationTypeTable = publicSchema.table("variation_type", {
   variationTypeId: uuid("variation_type_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   attributeType: uuid("attribute_type").notNull(),
 });
 
 export const categoryVariationTable = publicSchema.table("category_variation", {
   categoryVariationId: uuid("category_variation_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   categoryId: uuid("category_id")
     .references(() => categoryTable.categoryId)
     .notNull(),

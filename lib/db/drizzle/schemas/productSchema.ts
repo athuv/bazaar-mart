@@ -11,7 +11,7 @@ import { boolean, text, timestamp, uuid, integer } from "drizzle-orm/pg-core";
 export const productTable = publicSchema.table("product", {
   productId: uuid("product_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   vendorId: uuid("vendor_id")
     .references(() => vendorTable.vendorId)
     .notNull(),
@@ -31,7 +31,7 @@ export const productTable = publicSchema.table("product", {
 export const productFaqTable = publicSchema.table("product_faq", {
   productFaqId: uuid("product_faq_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   productId: uuid("product_id")
     .references(() => productTable.productId)
     .notNull(),
@@ -52,7 +52,7 @@ export const productFaqTable = publicSchema.table("product_faq", {
 export const productGalleryTable = publicSchema.table("product_gallery", {
   productGalleryId: uuid("product_gallery_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   productId: uuid("product_id")
     .references(() => productTable.productId)
     .notNull(),
@@ -64,7 +64,7 @@ export const productGalleryTable = publicSchema.table("product_gallery", {
 export const productReviewTable = publicSchema.table("product_review", {
   productReviewId: uuid("product_review_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   productId: uuid("product_id")
     .references(() => productTable.productId)
     .notNull(),
@@ -87,7 +87,7 @@ export const productReviewGalleryTable = publicSchema.table(
   {
     productReviewGalleryId: uuid("product_review_gallery_id")
       .primaryKey()
-      .$defaultFn(() => crypto.randomUUID()),
+      .default(sql`uuid_generate_v4()`),
     productReviewId: uuid("product_review_id")
       .references(() => productReviewTable.productReviewId)
       .notNull(),
@@ -102,7 +102,7 @@ export const productDiscountTable = publicSchema.table(
   {
     productDiscountId: uuid("product_discount_id")
       .primaryKey()
-      .$defaultFn(() => crypto.randomUUID()),
+      .default(sql`uuid_generate_v4()`),
     productInventoryId: uuid("product_inventory_id")
       .references(() => productInventoryTable.productInventoryId)
       .notNull(),
@@ -123,7 +123,7 @@ export const productInventoryTable = publicSchema.table(
   {
     productInventoryId: uuid("product_inventory_id")
       .primaryKey()
-      .$defaultFn(() => crypto.randomUUID()),
+      .default(sql`uuid_generate_v4()`),
     productId: uuid("product_id")
       .references(() => productTable.productId)
       .notNull(),
@@ -142,7 +142,7 @@ export const productInventoryTable = publicSchema.table(
 export const serviceTable = publicSchema.table("service", {
   serviceId: uuid("service_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   serviceName: text("service_name").notNull(),
   description: text("description").notNull(),
   durationHour: integer("duration_hour"),
@@ -159,7 +159,7 @@ export const serviceTable = publicSchema.table("service", {
 export const serviceProductTable = publicSchema.table("service_product", {
   serviceProductId: uuid("service_product_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   productInventoryId: uuid("product_inventory_id")
     .references(() => productInventoryTable.productInventoryId)
     .notNull(),
@@ -171,7 +171,7 @@ export const serviceProductTable = publicSchema.table("service_product", {
 export const productVariationTable = publicSchema.table("product_variation", {
   productVariationId: uuid("product_variation_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   productInventoryId: uuid("product_inventory_id")
     .references(() => productInventoryTable.productInventoryId)
     .notNull(),

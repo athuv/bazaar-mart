@@ -10,7 +10,7 @@ import { relations, sql } from "drizzle-orm";
 export const cartTable = publicSchema.table("cart", {
   cartId: uuid("cart_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   buyerId: uuid("buyerId").notNull(),
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
@@ -23,7 +23,7 @@ export const cartTable = publicSchema.table("cart", {
 export const cartItemTable = publicSchema.table("cart_item", {
   cartItemId: uuid("cart_item_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   cartId: uuid("cart_id")
     .references(() => cartTable.cartId)
     .notNull(),
@@ -39,7 +39,7 @@ export const cartItemTable = publicSchema.table("cart_item", {
 export const refundTable = publicSchema.table("refund", {
   refundId: uuid("refund_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   paymentId: uuid("payment_id"),
   refund_amount: integer("refund_amount").notNull(),
   reason: text("reason").notNull(),
@@ -57,21 +57,21 @@ export const refundTable = publicSchema.table("refund", {
 export const paymentMethodTable = publicSchema.table("payment_method", {
   paymentMethodId: uuid("payment_method_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   method: text("method").notNull(),
 });
 
 export const paymentStatusTable = publicSchema.table("payment_status", {
   paymentStatusId: uuid("payment_status_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   status: text("status").notNull(),
 });
 
 export const paymentTable = publicSchema.table("payment", {
   paymentId: uuid("payment_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   orderId: uuid("order_id")
     .references(() => orderTable.orderId)
     .notNull(),
@@ -94,14 +94,14 @@ export const paymentTable = publicSchema.table("payment", {
 export const orderStatusTable = publicSchema.table("order_status", {
   orderStatusId: uuid("order_status_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   status: text("status").notNull(),
 });
 
 export const orderTable = publicSchema.table("order", {
   orderId: uuid("order_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   buyerId: uuid("buyer_id")
     .references(() => buyerTable.buyerId)
     .notNull(),
@@ -126,7 +126,7 @@ export const orderTable = publicSchema.table("order", {
 export const orderItemTable = publicSchema.table("order_item", {
   orderItemId: uuid("order_item_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   orderId: uuid("order_id").references(() => orderTable.orderId),
   productId: uuid("product_id")
     .references(() => productTable.productId)
@@ -145,7 +145,7 @@ export const orderItemTable = publicSchema.table("order_item", {
 export const shippingTable = publicSchema.table("shipping", {
   shippingId: uuid("shipping_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   orderId: uuid("order_id")
     .references(() => orderTable.orderId)
     .notNull(),

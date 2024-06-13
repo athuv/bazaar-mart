@@ -18,7 +18,7 @@ const authUsers = authSchema.table("users", {
 export const vendorTable = publicSchema.table("vendor", {
   vendorId: uuid("vendor_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   userId: uuid("user_id")
     .references(() => authUsers.id, { onDelete: "cascade" })
     .notNull(),
@@ -31,7 +31,7 @@ export const vendorTable = publicSchema.table("vendor", {
 export const buyerTable = publicSchema.table("buyer", {
   buyerId: uuid("buyer_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   userId: uuid("user_id")
     .references(() => authUsers.id, { onDelete: "cascade" })
     .notNull(),
@@ -41,7 +41,7 @@ export const buyerTable = publicSchema.table("buyer", {
 export const addressTable = publicSchema.table("address", {
   addressId: uuid("address_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   userId: uuid("user_id")
     .references(() => authUsers.id, { onDelete: "cascade" })
     .notNull(),
@@ -55,7 +55,7 @@ export const addressTable = publicSchema.table("address", {
 export const sliderImageTable = publicSchema.table("slider_image", {
   sliderImageId: uuid("slider_image_id")
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .default(sql`uuid_generate_v4()`),
   userId: uuid("user_id")
     .references(() => authUsers.id, { onDelete: "cascade" })
     .notNull(),
