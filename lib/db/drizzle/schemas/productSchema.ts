@@ -128,6 +128,7 @@ export const productInventoryTable = publicSchema.table(
       .references(() => productTable.productId)
       .notNull(),
     batchName: text("batch_name").notNull(),
+    pricePerUnit: integer("price_per_unit").notNull(),
     initialQuantity: integer("initial_quantity").notNull(),
     availableQuantity: integer("available_quantity").notNull(),
     createdAt: timestamp("created_at")
