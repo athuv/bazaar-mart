@@ -21,6 +21,7 @@
 *.pem
 /_other/
 .vscode
+/lib/db/drizzle/migrations/**
 
 # debug
 npm-debug.log*
