@@ -33,12 +33,12 @@ async function PopularCategories() {
             <div key={_category.categoryId} className="flex items-center gap-2">
               <Avatar className="bg-secondary">
                 <AvatarImage
-                  src={_category.iconDataURL || undefined}
+                  src={_category.iconDataUrl || undefined}
                   asChild
                   className="p-2"
                 >
                   <Image
-                    src={_category.iconDataURL || "/"}
+                    src={_category.iconDataUrl || "/"}
                     height={24}
                     width={24}
                     alt={_category.categoryName}

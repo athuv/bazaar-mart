@@ -43,14 +43,14 @@ async function FeaturedCarousel() {
             <CarouselItem className="lg:flex-grow" key={_image.sliderImageId}>
               <Image
                 alt={_image.imageAlt!}
-                src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/slider-images/${_image.imageMobile}`}
+                src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/slider-images/${_image.imageMobileUrl}`}
                 width={768}
                 height={503}
                 className="object-contain md:hidden"
               />
               <Image
                 alt={_image.imageAlt!}
-                src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/slider-images/${_image.imageDesktop}`}
+                src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/slider-images/${_image.imageDesktopUrl}`}
                 width={1023}
                 height={375}
                 className="hidden object-contain md:inline lg:rounded-sm"

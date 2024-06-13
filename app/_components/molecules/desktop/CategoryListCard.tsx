@@ -148,8 +148,8 @@ function CategoryContent({
                   <Avatar className="h-12 w-12">
                     <AvatarImage
                       src={
-                        _subChildCategory.iconDataURL
-                          ? `images/categories/${_subChildCategory.iconDataURL}`
+                        _subChildCategory.iconDataUrl
+                          ? `images/categories/${_subChildCategory.iconDataUrl}`
                           : undefined
                       }
                       alt={_subChildCategory.categoryName}
@@ -208,7 +208,7 @@ function CategoryListCard() {
                 key={_category.categoryId}
                 categoryName={_category.categoryName}
                 childrenCategories={_category.children!}
-                icon={_category.iconDataURL || "/"}
+                icon={_category.iconDataUrl || "/"}
                 setSelectedCategory={setSelectedCategory!}
                 setOpen={setOpen}
               />
