@@ -6,7 +6,7 @@ export const categoryTable = publicSchema.table("category", {
   categoryId: uuid("category_id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  categoryName: uuid("category_name").notNull(),
+  categoryName: text("category_name").notNull(),
   parentId: uuid("parent_id").references(
     (): AnyPgColumn => categoryTable.categoryId,
   ),
