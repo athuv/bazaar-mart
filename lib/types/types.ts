@@ -7,12 +7,13 @@ export interface Image {
 export interface ResponsiveImage {
   sliderImageId: string;
   imageAlt: string | null;
-  imageMobile: string | null;
-  imageDesktop: string | null;
+  imageMobileUrl: string | null;
+  imageDesktopUrl: string | null;
 }
 
-export interface ScrollImage {
-  scroll: Image[];
+export interface SliderImage extends ResponsiveImage {
+  sliderImageId: string;
+  isActive?: boolean;
 }
 
 export interface BasicProductList {
@@ -32,7 +33,7 @@ export interface Category {
   categoryId: string;
   categoryName: string;
   parentId: string | null;
-  iconDataURL: string | null;
+  iconDataUrl: string | null;
   children?: Category[];
 }
 
