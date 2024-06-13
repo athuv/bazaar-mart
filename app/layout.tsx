@@ -7,7 +7,6 @@ import HeaderDektop from "@/app/_components/organisms/desktop/HeaderDesktop";
 import HeaderMobile from "@/app/_components/organisms/mobile/HeaderMobile";
 import AlertbarSection from "@/app/_components/organisms/AlertbarSection";
 import { Analytics } from "@vercel/analytics/react";
-import AuthSubscriber from "@/app/auth/AuthSubscriber";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +24,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} flex min-h-screen flex-col`}>
         <header className="sticky top-0 z-10">
-          {/* <AuthSubscriber /> */}
           <HeaderDektop />
           <HeaderMobile />
         </header>
