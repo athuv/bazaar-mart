@@ -1,8 +1,8 @@
 import { relations, sql } from "drizzle-orm";
-import { AnyPgColumn, text, uuid } from "drizzle-orm/pg-core";
-import { productVariationTable, publicSchema } from "@/lib/db/drizzle/schemas";
+import { AnyPgColumn, text, uuid, pgTable } from "drizzle-orm/pg-core";
+import { productVariationTable } from "@/lib/db/drizzle/schemas";
 
-export const categoryTable = publicSchema.table("category", {
+export const categoryTable = pgTable("category", {
   categoryId: uuid("category_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -13,36 +13,33 @@ export const categoryTable = publicSchema.table("category", {
   iconDataUrl: text("icon_data_url"),
 });
 
-export const variationValueTable = publicSchema.table("variation_value", {
+export const variationValueTable = pgTable("variation_value", {
   variationValueId: uuid("variation_value_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
   attributeValue: uuid("attribute_value").notNull(),
 });
 
-export const variationTypeValueTable = publicSchema.table(
-  "variation_type_value",
-  {
-    variationTypeValueId: uuid("variation_type_value_id")
-      .primaryKey()
-      .default(sql`uuid_generate_v4()`),
-    variationTypeId: uuid("variation_type_id")
-      .references(() => variationTypeTable.variationTypeId)
-      .notNull(),
-    variationValueId: uuid("variation_value_id")
-      .references(() => variationValueTable.variationValueId)
-      .notNull(),
-  },
-);
+export const variationTypeValueTable = pgTable("variation_type_value", {
+  variationTypeValueId: uuid("variation_type_value_id")
+    .primaryKey()
+    .default(sql`uuid_generate_v4()`),
+  variationTypeId: uuid("variation_type_id")
+    .references(() => variationTypeTable.variationTypeId)
+    .notNull(),
+  variationValueId: uuid("variation_value_id")
+    .references(() => variationValueTable.variationValueId)
+    .notNull(),
+});
 
-export const variationTypeTable = publicSchema.table("variation_type", {
+export const variationTypeTable = pgTable("variation_type", {
   variationTypeId: uuid("variation_type_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
   attributeType: uuid("attribute_type").notNull(),
 });
 
-export const categoryVariationTable = publicSchema.table("category_variation", {
+export const categoryVariationTable = pgTable("category_variation", {
   categoryVariationId: uuid("category_variation_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),

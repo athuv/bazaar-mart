@@ -1,6 +1,5 @@
-import { text, boolean, uuid, timestamp } from "drizzle-orm/pg-core";
+import { text, boolean, uuid, timestamp, pgTable } from "drizzle-orm/pg-core";
 import {
-  publicSchema,
   authSchema,
   cartTable,
   productFaqTable,
@@ -15,7 +14,7 @@ const authUsers = authSchema.table("users", {
   // No need to define other columns if they are not needed for the reference
 });
 
-export const vendorTable = publicSchema.table("vendor", {
+export const vendorTable = pgTable("vendor", {
   vendorId: uuid("vendor_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -28,7 +27,7 @@ export const vendorTable = publicSchema.table("vendor", {
   profileImageUrl: text("profile_image_url"),
 });
 
-export const buyerTable = publicSchema.table("buyer", {
+export const buyerTable = pgTable("buyer", {
   buyerId: uuid("buyer_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -38,7 +37,7 @@ export const buyerTable = publicSchema.table("buyer", {
   profileImageUrl: text("profile_image_url"),
 });
 
-export const addressTable = publicSchema.table("address", {
+export const addressTable = pgTable("address", {
   addressId: uuid("address_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -52,7 +51,7 @@ export const addressTable = publicSchema.table("address", {
   district: text("district").notNull(),
 });
 
-export const sliderImageTable = publicSchema.table("slider_image", {
+export const sliderImageTable = pgTable("slider_image", {
   sliderImageId: uuid("slider_image_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),

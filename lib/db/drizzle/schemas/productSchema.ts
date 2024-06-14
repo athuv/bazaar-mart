@@ -1,14 +1,20 @@
 import {
   buyerTable,
   categoryTable,
-  publicSchema,
   variationTypeValueTable,
   vendorTable,
 } from "@/lib/db/drizzle/schemas";
 import { relations, sql } from "drizzle-orm";
-import { boolean, text, timestamp, uuid, integer } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  text,
+  timestamp,
+  uuid,
+  integer,
+  pgTable,
+} from "drizzle-orm/pg-core";
 
-export const productTable = publicSchema.table("product", {
+export const productTable = pgTable("product", {
   productId: uuid("product_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -28,7 +34,7 @@ export const productTable = publicSchema.table("product", {
     .notNull(),
 });
 
-export const productFaqTable = publicSchema.table("product_faq", {
+export const productFaqTable = pgTable("product_faq", {
   productFaqId: uuid("product_faq_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -49,7 +55,7 @@ export const productFaqTable = publicSchema.table("product_faq", {
     .notNull(),
 });
 
-export const productGalleryTable = publicSchema.table("product_gallery", {
+export const productGalleryTable = pgTable("product_gallery", {
   productGalleryId: uuid("product_gallery_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -61,7 +67,7 @@ export const productGalleryTable = publicSchema.table("product_gallery", {
   isPrimary: boolean("is_primary").notNull(),
 });
 
-export const productReviewTable = publicSchema.table("product_review", {
+export const productReviewTable = pgTable("product_review", {
   productReviewId: uuid("product_review_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -82,22 +88,19 @@ export const productReviewTable = publicSchema.table("product_review", {
     .notNull(),
 });
 
-export const productReviewGalleryTable = publicSchema.table(
-  "product_review_gallery",
-  {
-    productReviewGalleryId: uuid("product_review_gallery_id")
-      .primaryKey()
-      .default(sql`uuid_generate_v4()`),
-    productReviewId: uuid("product_review_id")
-      .references(() => productReviewTable.productReviewId)
-      .notNull(),
-    imageUrl: text("image_url").notNull(),
-    imageAlt: text("image_alt").notNull(),
-    isPrimary: boolean("is_primary").notNull(),
-  },
-);
+export const productReviewGalleryTable = pgTable("product_review_gallery", {
+  productReviewGalleryId: uuid("product_review_gallery_id")
+    .primaryKey()
+    .default(sql`uuid_generate_v4()`),
+  productReviewId: uuid("product_review_id")
+    .references(() => productReviewTable.productReviewId)
+    .notNull(),
+  imageUrl: text("image_url").notNull(),
+  imageAlt: text("image_alt").notNull(),
+  isPrimary: boolean("is_primary").notNull(),
+});
 
-export const productDiscountTable = publicSchema.table("product_discount", {
+export const productDiscountTable = pgTable("product_discount", {
   productDiscountId: uuid("product_discount_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -115,7 +118,7 @@ export const productDiscountTable = publicSchema.table("product_discount", {
     .notNull(),
 });
 
-export const productInventoryTable = publicSchema.table("product_inventory", {
+export const productInventoryTable = pgTable("product_inventory", {
   productInventoryId: uuid("product_inventory_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -134,7 +137,7 @@ export const productInventoryTable = publicSchema.table("product_inventory", {
     .notNull(),
 });
 
-export const serviceTable = publicSchema.table("service", {
+export const serviceTable = pgTable("service", {
   serviceId: uuid("service_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -151,7 +154,7 @@ export const serviceTable = publicSchema.table("service", {
     .notNull(),
 });
 
-export const serviceProductTable = publicSchema.table("service_product", {
+export const serviceProductTable = pgTable("service_product", {
   serviceProductId: uuid("service_product_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -163,7 +166,7 @@ export const serviceProductTable = publicSchema.table("service_product", {
     .notNull(),
 });
 
-export const productVariationTable = publicSchema.table("product_variation", {
+export const productVariationTable = pgTable("product_variation", {
   productVariationId: uuid("product_variation_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),

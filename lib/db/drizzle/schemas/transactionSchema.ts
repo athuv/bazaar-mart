@@ -1,13 +1,12 @@
 import {
-  publicSchema,
   buyerTable,
   vendorTable,
   productTable,
 } from "@/lib/db/drizzle/schemas";
-import { integer, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { integer, text, timestamp, uuid, pgTable } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 
-export const cartTable = publicSchema.table("cart", {
+export const cartTable = pgTable("cart", {
   cartId: uuid("cart_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -20,7 +19,7 @@ export const cartTable = publicSchema.table("cart", {
     .notNull(),
 });
 
-export const cartItemTable = publicSchema.table("cart_item", {
+export const cartItemTable = pgTable("cart_item", {
   cartItemId: uuid("cart_item_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -36,7 +35,7 @@ export const cartItemTable = publicSchema.table("cart_item", {
     .notNull(),
 });
 
-export const refundTable = publicSchema.table("refund", {
+export const refundTable = pgTable("refund", {
   refundId: uuid("refund_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -54,21 +53,21 @@ export const refundTable = publicSchema.table("refund", {
     .notNull(),
 });
 
-export const paymentMethodTable = publicSchema.table("payment_method", {
+export const paymentMethodTable = pgTable("payment_method", {
   paymentMethodId: uuid("payment_method_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
   method: text("method").notNull(),
 });
 
-export const paymentStatusTable = publicSchema.table("payment_status", {
+export const paymentStatusTable = pgTable("payment_status", {
   paymentStatusId: uuid("payment_status_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
   status: text("status").notNull(),
 });
 
-export const paymentTable = publicSchema.table("payment", {
+export const paymentTable = pgTable("payment", {
   paymentId: uuid("payment_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -91,14 +90,14 @@ export const paymentTable = publicSchema.table("payment", {
     .notNull(),
 });
 
-export const orderStatusTable = publicSchema.table("order_status", {
+export const orderStatusTable = pgTable("order_status", {
   orderStatusId: uuid("order_status_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
   status: text("status").notNull(),
 });
 
-export const orderTable = publicSchema.table("order", {
+export const orderTable = pgTable("order", {
   orderId: uuid("order_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -123,7 +122,7 @@ export const orderTable = publicSchema.table("order", {
     .notNull(),
 });
 
-export const orderItemTable = publicSchema.table("order_item", {
+export const orderItemTable = pgTable("order_item", {
   orderItemId: uuid("order_item_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
@@ -142,7 +141,7 @@ export const orderItemTable = publicSchema.table("order_item", {
     .notNull(),
 });
 
-export const shippingTable = publicSchema.table("shipping", {
+export const shippingTable = pgTable("shipping", {
   shippingId: uuid("shipping_id")
     .primaryKey()
     .default(sql`uuid_generate_v4()`),
