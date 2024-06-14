@@ -1,24 +1,24 @@
 "use server";
 
 import { db } from "@/lib/db/drizzle";
-import { categoriesTable } from "@/lib/db/drizzle/schemas";
+import { categoryTable } from "@/lib/db/drizzle/schemas";
 import { eq, isNull } from "drizzle-orm";
 import { Category, GetMainCategories } from "@/lib/types/types";
 
 export async function getMainCategories({
   limit,
 }: GetMainCategories): Promise<Category[]> {
-  const mainCategories = await db.query.categoriesTable.findMany({
-    where: isNull(categoriesTable.parentId),
+  const mainCategories: Category[] = await db.query.categoryTable.findMany({
+    where: isNull(categoryTable.parentId),
     limit: limit,
-    orderBy: (categoriesTable, { asc }) => [asc(categoriesTable.categoryId)],
+    orderBy: (categoryTable, { asc }) => [asc(categoryTable.categoryId)],
   });
 
   return mainCategories;
 }
 
 export async function getAllCategories() {
-  const mainCategories: Category[] = await db.query.categoriesTable.findMany();
+  const mainCategories: Category[] = await db.query.categoryTable.findMany();
 
   function buildCategoryTree(
     categories: Category[],
@@ -31,7 +31,7 @@ export async function getAllCategories() {
     return children.map((category) => ({
       categoryId: category.categoryId,
       categoryName: category.categoryName,
-      iconDataURL: category.iconDataURL,
+      iconDataUrl: category.iconDataUrl,
       parentId: category.parentId,
       children: buildCategoryTree(categories, category.categoryId), // Recursive call for children
     }));
@@ -54,8 +54,8 @@ export async function getChildCategoryByParentId({
 }: {
   parentId: string;
 }): Promise<Category[]> {
-  const childCategories = await db.query.categoriesTable.findMany({
-    where: eq(categoriesTable.parentId, parentId),
+  const childCategories = await db.query.categoryTable.findMany({
+    where: eq(categoryTable.parentId, parentId),
   });
 
   return childCategories;

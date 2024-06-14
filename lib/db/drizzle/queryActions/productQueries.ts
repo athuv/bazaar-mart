@@ -2,10 +2,11 @@
 
 import { db } from "@/lib/db/drizzle";
 import {
-  productImagesTable,
-  productsTable,
-  productDiscountsTable,
-  productReviewsTable,
+  productGalleryTable,
+  productTable,
+  productDiscountTable,
+  productReviewTable,
+  productInventoryTable,
 } from "@/lib/db/drizzle/schemas";
 import { BasicProductList } from "@/lib/types/types";
 import { eq, sql } from "drizzle-orm";
@@ -13,61 +14,69 @@ import { eq, sql } from "drizzle-orm";
 export async function getBasicProducts(): Promise<BasicProductList[]> {
   const products = await db
     .select({
-      productId: productsTable.productId,
-      title: productsTable.title,
+      productId: productTable.productId,
+      title: productTable.title,
       priceInAmount:
-        sql<number>`${productsTable.originalPriceInCents} / 100`.as(
+        sql<number>`${productInventoryTable.pricePerUnit} / 100`.as(
           "price_in_amount",
         ),
-      totalReviews: sql<number>`count(${productReviewsTable.productId})`.as(
+      totalReviews: sql<number>`count(${productReviewTable.productId})`.as(
         "total_review",
       ),
-      primaryImageUrl: sql<string>`${productImagesTable.imageUrl}`,
-      primaryImageAlt: sql<string>`${productImagesTable.imageAlt}`,
-      discountPercentage: sql<number>`${productDiscountsTable.discountPercentage}`,
+      primaryImageUrl: sql<string>`${productGalleryTable.imageUrl}`,
+      primaryImageAlt: sql<string>`${productGalleryTable.imageAlt}`,
+      discountPercentage: sql<number>`${productDiscountTable.discountPercentage}`,
       discountAmount:
-        sql<number>`((${productsTable.originalPriceInCents} / 100) * (${productDiscountsTable.discountPercentage}) / 100)`.as(
+        sql<number>`((${productInventoryTable.pricePerUnit} / 100) * (${productDiscountTable.discountPercentage}) / 100)`.as(
           "discount_amount",
         ),
       finalPrice:
-        sql<number>`(${productsTable.originalPriceInCents} / 100) - (((${productsTable.originalPriceInCents} / 100) * (coalesce(${productDiscountsTable.discountPercentage}, 0)) / 100))`.as(
+        sql<number>`(${productInventoryTable.pricePerUnit} / 100) - (((${productInventoryTable.pricePerUnit} / 100) * (coalesce(${productDiscountTable.discountPercentage}, 0)) / 100))`.as(
           "final_price",
         ),
       averageReview: sql<number>`
         (
           SUM(
             CASE
-              WHEN ${productReviewsTable.rating} = 1 THEN 1.0 * 1
-              WHEN ${productReviewsTable.rating} = 2 THEN 1.0 * 2
-              WHEN ${productReviewsTable.rating} = 3 THEN 1.0 * 3
-              WHEN ${productReviewsTable.rating} = 4 THEN 1.0 * 4
-              WHEN ${productReviewsTable.rating} = 5 THEN 1.0 * 5
+              WHEN ${productReviewTable.rating} = 1 THEN 1.0 * 1
+              WHEN ${productReviewTable.rating} = 2 THEN 1.0 * 2
+              WHEN ${productReviewTable.rating} = 3 THEN 1.0 * 3
+              WHEN ${productReviewTable.rating} = 4 THEN 1.0 * 4
+              WHEN ${productReviewTable.rating} = 5 THEN 1.0 * 5
             END
           )
-        ) / CAST(COUNT(${productReviewsTable.rating}) AS FLOAT)`.as(
+        ) / CAST(COUNT(${productReviewTable.rating}) AS FLOAT)`.as(
         "average_review",
       ),
     })
-    .from(productsTable)
+    .from(productTable)
     .leftJoin(
-      productReviewsTable,
-      eq(productsTable.productId, productReviewsTable.productId),
+      productReviewTable,
+      eq(productTable.productId, productReviewTable.productId),
     )
     .leftJoin(
-      productImagesTable,
-      eq(productsTable.productId, productImagesTable.productId),
+      productGalleryTable,
+      eq(productTable.productId, productGalleryTable.productId),
     )
     .leftJoin(
-      productDiscountsTable,
-      eq(productsTable.productId, productDiscountsTable.productId),
+      productInventoryTable,
+      eq(productTable.productId, productInventoryTable.productId),
     )
-    .where(eq(productImagesTable.isPrimary, true))
-
+    .leftJoin(
+      productDiscountTable,
+      eq(
+        productInventoryTable.productInventoryId,
+        productDiscountTable.productInventoryId,
+      ),
+    )
+    .where(eq(productGalleryTable.isPrimary, true))
     .groupBy(
-      productsTable.productId,
-      productImagesTable.imageUrl,
-      productImagesTable.imageAlt,
-      productDiscountsTable.discountPercentage,
+      productTable.productId,
+      productGalleryTable.imageUrl,
+      productGalleryTable.imageAlt,
+      productDiscountTable.discountPercentage,
+      productInventoryTable.pricePerUnit,
     );
+
   return products;
 }
