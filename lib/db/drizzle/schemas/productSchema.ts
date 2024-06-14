@@ -97,26 +97,23 @@ export const productReviewGalleryTable = publicSchema.table(
   },
 );
 
-export const productDiscountTable = publicSchema.table(
-  "product_discount_table",
-  {
-    productDiscountId: uuid("product_discount_id")
-      .primaryKey()
-      .default(sql`uuid_generate_v4()`),
-    productInventoryId: uuid("product_inventory_id")
-      .references(() => productInventoryTable.productInventoryId)
-      .notNull(),
-    offerName: text("offer_name").notNull(),
-    discountPercentage: integer("discount_percentage").notNull(),
-    isActive: boolean("is_active").notNull(),
-    createdAt: timestamp("created_at")
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updated_at")
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-  },
-);
+export const productDiscountTable = publicSchema.table("product_discount", {
+  productDiscountId: uuid("product_discount_id")
+    .primaryKey()
+    .default(sql`uuid_generate_v4()`),
+  productInventoryId: uuid("product_inventory_id")
+    .references(() => productInventoryTable.productInventoryId)
+    .notNull(),
+  offerName: text("offer_name").notNull(),
+  discountPercentage: integer("discount_percentage").notNull(),
+  isActive: boolean("is_active").notNull(),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+});
 
 export const productInventoryTable = publicSchema.table("product_inventory", {
   productInventoryId: uuid("product_inventory_id")
