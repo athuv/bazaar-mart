@@ -118,27 +118,24 @@ export const productDiscountTable = publicSchema.table(
   },
 );
 
-export const productInventoryTable = publicSchema.table(
-  "product_inventory_table",
-  {
-    productInventoryId: uuid("product_inventory_id")
-      .primaryKey()
-      .default(sql`uuid_generate_v4()`),
-    productId: uuid("product_id")
-      .references(() => productTable.productId)
-      .notNull(),
-    batchName: text("batch_name").notNull(),
-    pricePerUnit: integer("price_per_unit").notNull(),
-    initialQuantity: integer("initial_quantity").notNull(),
-    availableQuantity: integer("available_quantity").notNull(),
-    createdAt: timestamp("created_at")
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updated_at")
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-  },
-);
+export const productInventoryTable = publicSchema.table("product_inventory", {
+  productInventoryId: uuid("product_inventory_id")
+    .primaryKey()
+    .default(sql`uuid_generate_v4()`),
+  productId: uuid("product_id")
+    .references(() => productTable.productId)
+    .notNull(),
+  batchName: text("batch_name").notNull(),
+  pricePerUnit: integer("price_per_unit").notNull(),
+  initialQuantity: integer("initial_quantity").notNull(),
+  availableQuantity: integer("available_quantity").notNull(),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+});
 
 export const serviceTable = publicSchema.table("service", {
   serviceId: uuid("service_id")
