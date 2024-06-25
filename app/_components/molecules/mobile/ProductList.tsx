@@ -21,7 +21,7 @@ async function ProductList() {
       {[...products, ...products, ...products, ...products].map((_product) => {
         return (
           <Button
-            className="h-[276px] w-[148px] whitespace-normal px-0 py-0 "
+            className="h-[276px] w-[148px] whitespace-normal px-0 py-0"
             key={_product.productId}
             variant="ghost"
             asChild
@@ -29,7 +29,7 @@ async function ProductList() {
             <Link href={`/product/${_product.productId}`}>
               <Card className="w-[148px] rounded-md border-none">
                 <Image
-                  src={`https://hjziiwmkcssstjzmgnad.supabase.co/storage/v1/object/public/bz-mart/products/${_product.productId}/148_${_product.primaryImageUrl}`}
+                  src={`${process.env.PRODUCT_GALLERY}/${_product.productId}/148_${_product.primaryImageUrl}`}
                   alt={_product.primaryImageAlt!}
                   width={148}
                   height={148}
