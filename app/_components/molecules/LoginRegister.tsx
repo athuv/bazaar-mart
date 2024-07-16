@@ -73,6 +73,19 @@ function LoginRegister() {
                 <SignupForm />
               </div>
             </CardContent>
+            <CardFooter className="flex flex-col items-center justify-center">
+              <span className="text-xs">Already a member?</span>
+              <TabsList
+                className="h-fit bg-transparent p-0 text-xs text-card-foreground ring-offset-0 transition-none"
+                asChild
+              >
+                <TabsTrigger value="login" asChild>
+                  <span className="cursor-pointer hover:underline">
+                    Login Here
+                  </span>
+                </TabsTrigger>
+              </TabsList>
+            </CardFooter>
           </Card>
         </TabsContent>
       </Tabs>
