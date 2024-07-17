@@ -149,7 +149,7 @@ function CategoryContent({
                     <AvatarImage
                       src={
                         _subChildCategory.iconDataUrl
-                          ? `images/categories/${_subChildCategory.iconDataUrl}`
+                          ? `${process.env.NEXT_PUBLIC_CATEGORY_IMAGE}/${_subChildCategory.iconDataUrl}`
                           : undefined
                       }
                       alt={_subChildCategory.categoryName}
