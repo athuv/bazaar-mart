@@ -80,3 +80,16 @@ export async function getBasicProducts(): Promise<BasicProductList[]> {
 
   return products;
 }
+
+export async function getProductImages(productId: string) {
+  const productImages = db
+    .select({
+      productGalleryId: productGalleryTable.productGalleryId,
+      imageUrl: productGalleryTable.imageUrl,
+      imageAlt: productGalleryTable.imageAlt,
+    })
+    .from(productGalleryTable)
+    .where(eq(productGalleryTable.productId, productId));
+
+  return productImages;
+}
