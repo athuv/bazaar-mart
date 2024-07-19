@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} flex min-h-screen flex-col`}>
-        <header className="sticky top-0 z-10">
+        <header className="sticky -top-px z-10">
           <HeaderDektop />
           <HeaderMobile />
         </header>
