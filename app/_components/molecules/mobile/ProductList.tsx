@@ -29,7 +29,7 @@ async function ProductList() {
             <Link href={`/product/${_product.productId}`}>
               <Card className="w-[148px] rounded-md border-none">
                 <Image
-                  src={`${process.env.PRODUCT_GALLERY}/${_product.productId}/148_${_product.primaryImageUrl}`}
+                  src={`${process.env.PRODUCT_GALLERY}/${_product.productId}/${_product.primaryImageUrl}`}
                   alt={_product.primaryImageAlt!}
                   width={148}
                   height={148}
