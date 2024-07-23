@@ -45,3 +45,9 @@ export interface CategoriesHook {
   mainCategories: Category[];
   categoriesTree: Category[];
 }
+
+export interface ProductImages {
+  productGalleryId: string;
+  imageUrl: string;
+  imageAlt: string;
+}
