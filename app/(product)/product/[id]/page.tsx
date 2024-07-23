@@ -3,7 +3,7 @@ import SearchSection from "@/app/_components/organisms/mobile/SearchSection";
 
 function page({ params }: { params: { id: string } }) {
   return (
-    <main className="flex-grow">
+    <main className="flex-grow lg:mx-auto lg:max-w-6xl xl:max-w-7xl">
       <SearchSection />
       <MobileProductCarousel productId={params.id} />
       <div className="px-4 pt-2">
