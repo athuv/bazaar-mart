@@ -1,12 +1,15 @@
 import LogoutDesktopButton from "@/app/_components/atoms/buttons/LogoutDesktopButton";
 import { Button } from "@/app/_components/atoms/shadcn/button";
-import { getUser } from "@/lib/actions/authAction";
+import { createClient } from "@/lib/db/supabase/server";
 import { DESKTOP_NAV_RIGHT } from "@/lib/configs/desktopUiConfig";
 import { User } from "lucide-react";
 import Link from "next/link";
 
 async function AuthButton() {
-  const user = await getUser();
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return user ? (
     <LogoutDesktopButton />

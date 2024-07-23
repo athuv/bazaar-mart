@@ -1,6 +1,6 @@
 "use server";
 
-import { getBackEndClient } from "@/lib/actions/actionHelper";
+import { createClient } from "@/lib/db/supabase/server";
 import { SignupSchema, signupSchema } from "@/lib/zod";
 import { emailSchema } from "@/lib/zod/emailSchema";
 import { redirect } from "next/navigation";
@@ -12,7 +12,7 @@ type err = {
 };
 
 export async function signup(formData: SignupSchema): Promise<err[] | err> {
-  const supabase = await getBackEndClient();
+  const supabase = createClient();
   const validationResults = signupSchema.safeParse(formData);
 
   if (!validationResults.success) {
@@ -56,7 +56,7 @@ export async function login(formData: SignupSchema): Promise<err[] | err> {
     return zodErrors;
   }
 
-  const supabase = await getBackEndClient();
+  const supabase = createClient();
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email: formData.email,
@@ -74,7 +74,7 @@ export async function login(formData: SignupSchema): Promise<err[] | err> {
 }
 
 export async function logout() {
-  const supabase = await getBackEndClient();
+  const supabase = createClient();
   const { error } = await supabase.auth.signOut({ scope: "local" });
 
   if (!error) {
@@ -82,23 +82,11 @@ export async function logout() {
   }
 }
 
-export async function getUser() {
-  const supabase = await getBackEndClient();
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error) {
-    console.error("Error fetching user:", error);
-    return null;
-  }
-
-  return data.user || null;
-}
-
 export async function resendConfirmationEmail(email: string) {
   const validationResults = emailSchema.safeParse({ email });
 
   if (validationResults.success) {
-    const supabase = await getBackEndClient();
+    const supabase = createClient();
     const { error } = await supabase.auth.resend({
       type: "signup",
       email: email,

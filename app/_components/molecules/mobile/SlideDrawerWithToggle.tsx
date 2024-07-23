@@ -14,7 +14,7 @@ import SlideDrawerSettings from "@/app/_components/molecules/mobile/SlideDrawerS
 import { X } from "lucide-react";
 import { Suspense } from "react";
 import { Skeleton } from "@/app/_components/atoms/shadcn/skeleton";
-import { getUser } from "@/lib/actions/authAction";
+import { createClient } from "@/lib/db/supabase/server";
 import LogoutMobileButton from "@/app/_components/atoms/buttons/LogoutMobileButton";
 
 function PopularCategoriesSkeleton() {
@@ -59,7 +59,10 @@ function PopularCategoriesSkeleton() {
 }
 
 async function SlideDrawerWithToggle() {
-  const user = await getUser();
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <div>

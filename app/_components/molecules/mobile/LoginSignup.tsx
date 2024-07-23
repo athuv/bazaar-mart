@@ -1,9 +1,12 @@
 import { Button } from "@/app/_components/atoms/shadcn/button";
 import Link from "next/link";
-import { getUser } from "@/lib/actions/authAction";
+import { createClient } from "@/lib/db/supabase/server";
 
 async function LoginSignup() {
-  const user = await getUser();
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     !user && (

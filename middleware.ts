@@ -1,21 +1,7 @@
 import { type NextRequest } from "next/server";
 import { updateSession } from "@/lib/db/supabase/middleware";
-import { NextResponse } from "next/server";
-import { getUser } from "@/lib/actions/authAction";
 
 export async function middleware(request: NextRequest) {
-  const user = await getUser();
-  const url = request.nextUrl.clone();
-
-  const denyIfLoggedIn = ["/auth"];
-
-  if (denyIfLoggedIn.includes(url.pathname)) {
-    if (user) {
-      url.pathname = "/";
-      return NextResponse.redirect(url);
-    }
-  }
-
   return await updateSession(request);
 }
 
